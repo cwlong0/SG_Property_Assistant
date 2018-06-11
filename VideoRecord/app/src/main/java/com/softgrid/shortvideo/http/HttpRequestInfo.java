@@ -2,11 +2,27 @@ package com.softgrid.shortvideo.http;
 
 import android.content.Context;
 
+import com.softgrid.shortvideo.info.UserInfo;
 import com.softgrid.shortvideo.tool.DeviceInfoTool;
 
 import org.json.JSONObject;
 
 public class HttpRequestInfo {
+
+	private static HttpRequestInfo info;
+
+	private HttpRequestInfo(){
+
+	}
+
+	public static HttpRequestInfo getInstance(){
+
+		if (info == null){
+			info = new HttpRequestInfo();
+		}
+
+		return info;
+	}
 
 	/**
 	 * 获取请求参数
@@ -18,7 +34,7 @@ public class HttpRequestInfo {
 	 * @param params 扩展参数
 	 * 
 	 * */
-	public static String getRequestParams(Context context, String act, String params){
+	public String getRequestParams(Context context, String act, String params){
 		String requestParams = null;
 		JSONObject requestParamsJson = new JSONObject();
 		try {
@@ -30,12 +46,20 @@ public class HttpRequestInfo {
 			requestParamsJson.put("o", "Android " + DeviceInfoTool.getSysVersion());
 			requestParamsJson.put("n", DeviceInfoTool.getPageName(context));
 			requestParamsJson.put("v", DeviceInfoTool.getAppVersionName(context));
+
+			JSONObject r = new JSONObject();
+			if (UserInfo.getInstance().getUserId(context) != null){
+				r.put("id", UserInfo.getInstance().getUserId(context));
+				r.put("token", UserInfo.getInstance().getToken(context));
+			}
+
 			if (params != null && !params.equals("")) {
-				requestParamsJson.put("r", new JSONObject(params));
+				r.put("d", new JSONObject(params));
 			}
 			else{
-				requestParamsJson.put("r", "");
+				r.put("d", "");
 			}
+			requestParamsJson.put("r", r);
 			
 			requestParams = requestParamsJson.toString();
 			

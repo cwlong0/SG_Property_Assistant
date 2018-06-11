@@ -3,6 +3,7 @@ package com.softgrid.shortvideo.logicImpl;
 import android.content.Context;
 
 import com.softgrid.shortvideo.callback.CallBackListener;
+import com.softgrid.shortvideo.http.HttpRequestInfo;
 import com.softgrid.shortvideo.iLogic.INetLogic;
 import com.softgrid.shortvideo.model.Building;
 import com.softgrid.shortvideo.model.Loans;
@@ -10,6 +11,8 @@ import com.softgrid.shortvideo.model.Notice;
 import com.softgrid.shortvideo.model.SearchCondition;
 import com.softgrid.shortvideo.model.Transaction;
 import com.softgrid.shortvideo.model.User;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,6 +24,19 @@ public class NetLogicImpl implements INetLogic {
 
     @Override
     public void register(Context context, User user, String verification, CallBackListener<User> listener) {
+        try {
+            JSONObject params = new JSONObject();
+            params.put("mail", user.getEmail());
+
+            String paramsString = params.toString();
+
+            String url = null;
+            String body = HttpRequestInfo.getInstance()
+                    .getRequestParams(context, "account/binding", paramsString);
+        }
+        catch (Exception e){
+
+        }
 
     }
 
