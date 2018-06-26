@@ -24,18 +24,21 @@ public class NetLogicImpl implements INetLogic {
 
     @Override
     public void register(Context context, User user, String verification, CallBackListener<User> listener) {
+
+        String url = null;
+        String body = null;
         try {
             JSONObject params = new JSONObject();
             params.put("mail", user.getEmail());
 
             String paramsString = params.toString();
 
-            String url = null;
-            String body = HttpRequestInfo.getInstance()
+            url = "http://www.baidu.com";
+            body = HttpRequestInfo.getInstance()
                     .getRequestParams(context, "account/binding", paramsString);
         }
         catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }
