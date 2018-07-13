@@ -3,4 +3,38 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="main_top">#FB5058</color>
+    <color name="main_top_selected">#F0464D</color>
+    <color name="main_top_down">#ff302935</color>
+    <color name="main_bottom">#808080</color>
+    <color name="main_bg">#ffffff</color>
+    <color name="item_normal">#fff5f5f5</color>
+    <color name="item_pressed">#ffe6e6e6</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="transparent_background">#05000000</color>
+    <color name="transparent_clicked">#c0ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="gainsboro">#fff7f9f8</color>
+
+    <color name="color_text">#000000</color>
+    <color name="color_detail">#979797</color>
+    <color name="color_link">#3F51B5</color>
+
+    <color name="line_color">#fff0f0f0</color>
+    <color name="list_offset_color">#10000000</color>
+    <color name="type_bg">#ffffffff</color>
+
+
+    <color name="color_05000000">#05000000</color>
+    <color name="color_10000000">#10000000</color>
+    <color name="color_20000000">#20000000</color>
+    <color name="color_90000000">#90000000</color>
+    <color name="color_E5E5E5">#E5E5E5</color>
+
+    <color name="tab_normal">#C5BBAF</color>
+    <color name="tab_select">#FB5058</color>
 </resources>

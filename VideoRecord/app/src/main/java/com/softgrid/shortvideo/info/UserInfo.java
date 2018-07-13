@@ -54,4 +54,12 @@ public class UserInfo {
         return id;
 
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

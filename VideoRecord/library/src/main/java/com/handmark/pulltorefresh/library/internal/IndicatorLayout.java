@@ -52,7 +52,7 @@ public class IndicatorLayout extends FrameLayout implements AnimationListener {
 
 		final int padding = getResources().getDimensionPixelSize(R.dimen.indicator_internal_padding);
 		mArrowImageView.setPadding(padding, padding, padding, padding);
-		addView(mArrowImageView);
+//		addView(mArrowImageView);
 
 		int inAnimResId, outAnimResId;
 		switch (mode) {

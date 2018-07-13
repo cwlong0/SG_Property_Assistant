@@ -9,6 +9,10 @@ import org.json.JSONObject;
 
 public class HttpRequestInfo {
 
+	public static final String HOST = "http://www.baidu.com";
+
+	public static final String MEDIA_TYPE_DEF = "text/x-markdown; charset=utf-8";
+
 	private static HttpRequestInfo info;
 
 	private HttpRequestInfo(){

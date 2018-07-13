@@ -1,5 +1,8 @@
 package com.softgrid.shortvideo.model;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Created by tianfeng on 2018/6/5.
  */
@@ -9,12 +12,18 @@ public class User {
     private String id;
     private String name;
     private String email;
-    private String nric;    //身份证号
+    private String pass;
+    private String nric;            //身份证号
     private String tel;
     private String tel2;
     private String adress;
     private String image;
+    private String company;
     private String intro;
+    private String business;
+    private String charge;
+    private int rate;
+    private ArrayList<Tag> tags;
     private int type;
     private int channel;
     private String wechat;
@@ -23,6 +32,27 @@ public class User {
     private long createAt;
     private long updateAt;
     private long loginAt;
+
+    public User(boolean test){
+        if (test){
+            name = "田峰";
+            email = "feng.tian@exdorean.com";
+            tel = "15928571421";
+            image = "http://fdfs.xmcdn.com/group23/M01/15/2B/wKgJL1gYYjzxW7fQAAWaMAvliP8961_mobile_meduim.jpg";
+            company = "成都柔联物联网络科技有限公司";
+            birthday = System.currentTimeMillis();
+            rate = new Random().nextInt(60);
+
+            tags = new ArrayList<>();
+            tags.add(new Tag(true));
+            tags.add(new Tag(true));
+            tags.add(new Tag(true));
+            tags.add(new Tag(true));
+
+            business = "公寓中介";
+            charge = "总房价1%";
+        }
+    }
 
 
     public String getId() {
@@ -43,6 +73,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public void setEmail(String email) {
@@ -89,12 +127,52 @@ public class User {
         this.image = image;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     public String getIntro() {
         return intro;
     }
 
     public void setIntro(String intro) {
         this.intro = intro;
+    }
+
+    public String getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(String business) {
+        this.business = business;
+    }
+
+    public String getCharge() {
+        return charge;
+    }
+
+    public void setCharge(String charge) {
+        this.charge = charge;
+    }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    public ArrayList<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<Tag> tags) {
+        this.tags = tags;
     }
 
     public int getType() {

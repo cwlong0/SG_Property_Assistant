@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="120dip"
+    android:background="@drawable/color_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--图片区域-->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/building_image"
+                    android:layout_width="120dip"
+                    android:layout_height="85dip"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/fc_realestate_placeholder"/>
+                <ImageView
+                    android:id="@+id/building_type_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fc_homelist_triangle_bg"/>
+                <TextView
+                    android:id="@+id/building_type_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dip"
+                    android:textColor="@color/white"
+                    android:text="@string/type_new"
+                    android:textStyle="bold"
+                    android:textSize="11dip" />
+            </FrameLayout>
+            <!--关注数量-->
+            <TextView
+                android:id="@+id/building_follower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:textColor="@color/color_detail"
+                android:text="100 关注"/>
+        </LinearLayout>
+
+        <!--信息区域-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dip"
+            >
+            <!--状态-->
+            <FrameLayout
+                android:id="@+id/building_status_layout"
+                android:layout_width="60dip"
+                android:layout_height="20dip"
+                android:background="@drawable/bg_status"
+                android:layout_alignParentRight="true">
+                <TextView
+                    android:id="@+id/building_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/status_1"/>
+            </FrameLayout>
+            <!--title-->
+            <TextView
+                android:id="@+id/building_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/building_status_layout"
+                android:layout_marginRight="3dip"
+                android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:lines="2"
+                android:textColor="@color/color_text"
+                android:ellipsize="end"
+                android:text="朗诗西华府二期"/>
+            <!--desc-->
+            <TextView
+                android:id="@+id/building_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/building_title"
+                android:layout_marginTop="3dip"
+                android:textSize="13sp"
+                android:singleLine="true"
+                android:textColor="@color/color_detail"
+                android:text="3-5rooms | 50-100m | 朝南"/>
+
+            <!--价钱-->
+            <LinearLayout
+                android:id="@+id/building_price_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/building_desc"
+                android:layout_marginTop="3dip"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/building_total_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/building_status_layout"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:textColor="@color/main_top"
+                    android:text="100万"/>
+
+                <TextView
+                    android:id="@+id/building_unit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/building_status_layout"
+                    android:layout_marginLeft="3dip"
+                    android:textSize="12sp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_detail"
+                    android:text="10800新元/m"/>
+
+            </LinearLayout>
+
+            <!--tag-->
+            <com.softgrid.shortvideo.customView.FlowLayout
+                android:id="@+id/building_flow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/building_price_layout"
+                android:layout_marginTop="3dip"
+                app:itemColor="@color/color_detail"
+                app:itemSize="10sp"
+                app:textPaddingH ="5dp"
+                app:textPaddingV ="2dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

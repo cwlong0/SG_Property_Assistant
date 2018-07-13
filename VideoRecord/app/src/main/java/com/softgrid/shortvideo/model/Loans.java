@@ -12,11 +12,9 @@ public class Loans {
     private String desc;
     private float total;
     private int year;
+    private Building building;
     private Transaction transaction;
     private User banker;
-    private int haveBanker;
-    private int isUploadDoc;
-    private int isGet;
     private long createAt;
     private long updateAt;
 
@@ -60,6 +58,14 @@ public class Loans {
         this.year = year;
     }
 
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
     public Transaction getTransaction() {
         return transaction;
     }
@@ -74,30 +80,6 @@ public class Loans {
 
     public void setBanker(User banker) {
         this.banker = banker;
-    }
-
-    public int getHaveBanker() {
-        return haveBanker;
-    }
-
-    public void setHaveBanker(int haveBanker) {
-        this.haveBanker = haveBanker;
-    }
-
-    public int getIsUploadDoc() {
-        return isUploadDoc;
-    }
-
-    public void setIsUploadDoc(int isUploadDoc) {
-        this.isUploadDoc = isUploadDoc;
-    }
-
-    public int getIsGet() {
-        return isGet;
-    }
-
-    public void setIsGet(int isGet) {
-        this.isGet = isGet;
     }
 
     public long getCreateAt() {

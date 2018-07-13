@@ -16,20 +16,13 @@ import android.widget.VideoView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.softgrid.shortvideo.upload.VideoListPersistence;
 
-import lm.kit.annotation.BindLayout;
-import lm.kit.annotation.FindView;
-import lm.kit.lazy.LazyKit;
 
-@BindLayout(layout = R.layout.activity_main)
 public class MainActivity extends Activity {
 
-    @FindView(id = R.id.video_thumb)
     ImageView video_thumb;
 
-    @FindView(id = R.id.videoView)
     VideoView video_view;
 
-    @FindView(id = R.id.video_container)
     View video_container;
 
     VideoListPersistence vlp;
@@ -42,11 +35,13 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         int flag = WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setFlags(flag, flag);
+        setContentView(R.layout.activity_main);
         vlp = new VideoListPersistence(this);
 
-//        video_container = findViewById(R.id.video_container);
-//        video_thumb = findViewById(R.id.video_thumb);
-//        video_view = findViewById(R.id.videoView);
+        video_container = findViewById(R.id.video_container);
+        video_thumb = findViewById(R.id.video_thumb);
+        video_view = findViewById(R.id.videoView);
+
         video_view.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
@@ -66,6 +61,7 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
                 startActivity(intent);
+
             }
         });
 

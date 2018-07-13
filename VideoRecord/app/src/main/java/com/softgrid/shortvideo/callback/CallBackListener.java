@@ -7,6 +7,14 @@ package com.softgrid.shortvideo.callback;
 public interface CallBackListener<T> {
 
     /**
+     * 通过缓存完成
+     *
+     * @param data 完成后得到的数据
+     *
+     * */
+    void onCache(T data);
+
+    /**
      * 完成
      *
      * @param data 完成后得到的数据
@@ -21,11 +29,5 @@ public interface CallBackListener<T> {
      *
      * */
      void onError(ErrorInfo errorInfo);
-
-     /**
-      * 取消
-      *
-      * */
-     void onCancel();
 
 }

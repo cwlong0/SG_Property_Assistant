@@ -8,6 +8,8 @@ public class Notice {
 
     private int id;
     private int type;
+    private Object model;
+    private User user;
     private String title;
     private String desc;
     private int isRead;
@@ -28,6 +30,22 @@ public class Notice {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public Object getModel() {
+        return model;
+    }
+
+    public void setModel(Object model) {
+        this.model = model;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {

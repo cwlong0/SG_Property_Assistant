@@ -1,3 +1,86 @@
 <resources>
     <string name="app_name">ShortVideo</string>
+    <string name="area_unit">㎡</string>
+
+    <string name="building_new">新房</string>
+    <string name="building_resale">二手房</string>
+    <string name="building_detail">房产详情</string>
+    <string name="building_intro">房产介绍</string>
+    <string name="basic_info">基本信息</string>
+    <string name="basic_unitprice">单价</string>
+    <string name="basic_type">类型</string>
+    <string name="basic_status">状态</string>
+    <string name="basic_floor">楼层</string>
+    <string name="basic_year">年代</string>
+    <string name="basic_orientation">朝向</string>
+    <string name="basic_decorate">装修</string>
+    <string name="basic_publish">发布</string>
+    <string name="basic_budget">预算</string>
+    <string name="basic_address">地址</string>
+    <string name="basic_opentime">摇号时间</string>
+
+    <string name="consult">咨询</string>
+    <string name="consult_intermediary">咨询中介</string>
+    <string name="contacts">联系人</string>
+
+    <string name="decorate_0">其他</string>
+    <string name="decorate_1">毛坯</string>
+    <string name="decorate_2">简装</string>
+    <string name="decorate_3">普装</string>
+    <string name="decorate_4">精装</string>
+    <string name="decorate_5">豪装</string>
+
+    <string name="follower">收藏</string>
+    <string name="feature">特色</string>
+    <string name="floor">层</string>
+
+    <string name="intermediary">中介</string>
+    <string name="intermediary_recommend">中介推荐</string>
+
+    <string name="loan">贷款</string>
+    <string name="loan_consult">贷款咨询？</string>
+    <string name="loan_and_total">总价和贷款>></string>
+
+    <string name="no_data">没有数据</string>
+
+    <string name="orientation_1">朝东</string>
+    <string name="orientation_2">朝西</string>
+    <string name="orientation_3">朝南</string>
+    <string name="orientation_4">朝北</string>
+    <string name="orientation_5">朝东南</string>
+    <string name="orientation_6">朝东北</string>
+    <string name="orientation_7">朝西南</string>
+    <string name="orientation_8">朝西北</string>
+
+
+    <string name="price_unit_1">新元/㎡</string>
+    <string name="price_unit_2">元/㎡</string>
+    <string name="price_total_1">新元</string>
+    <string name="price_total_2">元</string>
+
+    <string name="q_a">问答</string>
+
+    <string name="rank_new">新房推荐</string>
+    <string name="rank_resale">二手房推荐</string>
+    <string name="room_unit">rooms</string>
+    <string name="ren">人</string>
+
+    <string name="subscribe_look">预约看房</string>
+    <string name="status_1">等待摇号</string>
+    <string name="status_2">摇号中</string>
+    <string name="status_3">尾盘</string>
+    <string name="status_4">售罄</string>
+    <string name="search_tips">搜索楼盘/街道/开发商</string>
+
+    <string name="type_flat">公寓</string>
+    <string name="take_up">申请认购</string>
+    <string name="type_new">新</string>
+    <string name="tab_1">首页</string>
+    <string name="tab_2">搜索</string>
+    <string name="tab_3">消息</string>
+    <string name="tab_4">我的</string>
+
+    <string name="wan">万</string>
+
+
 </resources>

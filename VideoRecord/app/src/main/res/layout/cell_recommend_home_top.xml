@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <RelativeLayout
+        android:id="@+id/discovery_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fc_banner_placeholder"
+        >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/banner_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/banner_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dip"
+            android:layout_marginRight="5dip"
+            android:paddingLeft="7dip"
+            android:paddingRight="7dip"
+            android:background="@drawable/bg_transparent_corners"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:text="1/10"
+            android:textSize="12dip" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <com.softgrid.shortvideo.customView.CImageView
+            android:id="@+id/image_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fc_index_search_box"/>
+        <ImageView
+            android:id="@+id/icon_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dip"
+            android:src="@drawable/fc_homepage_search"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon_search"
+            android:layout_marginLeft="5dip"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:textColor="@color/color_detail"
+            android:text="@string/search_tips"
+            android:textSize="14dip" />
+        <com.softgrid.shortvideo.customView.CImageView
+            android:id="@+id/icon_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dip"
+            android:src="@drawable/fc_details_positioning"/>
+    </RelativeLayout>
+
+    <!--新房、二手房、咨询、问答-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <!--新房-->
+        <LinearLayout
+            android:id="@+id/layout_building_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/color_white">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/fc_homepage_bridalchamber"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/color_text"
+                android:text="@string/building_new"
+                android:textSize="14dip" />
+        </LinearLayout>
+
+        <!--二手房-->
+        <LinearLayout
+            android:id="@+id/layout_building_resale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/color_white">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/fc_homepage_secondary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/color_text"
+                android:text="@string/building_resale"
+                android:textSize="14dip" />
+        </LinearLayout>
+
+        <!--咨询-->
+        <LinearLayout
+            android:id="@+id/layout_building_consult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/color_white">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/fc_homepage_news"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/color_text"
+                android:text="@string/consult"
+                android:textSize="14dip" />
+        </LinearLayout>
+
+        <!--问答-->
+        <LinearLayout
+            android:id="@+id/layout_qa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/color_white">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/fc_homepage_answer"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/color_text"
+                android:text="@string/q_a"
+                android:textSize="14dip" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dip"
+        android:background="@color/main_bg"/>
+</LinearLayout>

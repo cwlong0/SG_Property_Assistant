@@ -8,14 +8,15 @@ public class Transaction {
 
     private String id;
     private int type;
+    private int total;
     private int haveLoans;
     private Building building;
     private User buyer;
     private User seller;
     private User lawyer;
-
     private User intermediary;
     private TransactionStatus status;
+    private long buyTime;
     private long contractTime;
     private Loans loans;
     private long createAt;
@@ -35,6 +36,14 @@ public class Transaction {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public int getHaveLoans() {
@@ -91,6 +100,14 @@ public class Transaction {
 
     public void setStatus(TransactionStatus status) {
         this.status = status;
+    }
+
+    public long getBuyTime() {
+        return buyTime;
+    }
+
+    public void setBuyTime(long buyTime) {
+        this.buyTime = buyTime;
     }
 
     public long getContractTime() {
