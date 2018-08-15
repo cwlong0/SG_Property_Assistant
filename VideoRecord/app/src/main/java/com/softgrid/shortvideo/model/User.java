@@ -16,11 +16,11 @@ public class User {
     private String nric;            //身份证号
     private String tel;
     private String tel2;
-    private String adress;
+    private String address;
     private String image;
     private String company;
     private String intro;
-    private String business;
+    private ArrayList<Tag> business;
     private String charge;
     private int rate;
     private ArrayList<Tag> tags;
@@ -40,6 +40,7 @@ public class User {
             tel = "15928571421";
             image = "http://fdfs.xmcdn.com/group23/M01/15/2B/wKgJL1gYYjzxW7fQAAWaMAvliP8961_mobile_meduim.jpg";
             company = "成都柔联物联网络科技有限公司";
+            intro = "师从谢雁鸣研究员，以绝经后骨质疏松症、中风病等为切入点，开展高危人群发病相关危险因素和中医证候要素的研究，进行高危人群疾病早期预测模型构建方法研究。开展中医临床研究随机方案设计、数据管理和统计分析工作";
             birthday = System.currentTimeMillis();
             rate = new Random().nextInt(60);
 
@@ -49,7 +50,15 @@ public class User {
             tags.add(new Tag(true));
             tags.add(new Tag(true));
 
-            business = "公寓中介";
+            business = new ArrayList<>();
+            business.add(new Tag(true));
+            business.add(new Tag(true));
+            business.add(new Tag(true));
+            business.add(new Tag(true));
+            business.add(new Tag(true));
+            business.add(new Tag(true));
+            business.add(new Tag(true));
+            business.add(new Tag(true));
             charge = "总房价1%";
         }
     }
@@ -111,12 +120,12 @@ public class User {
         this.tel2 = tel2;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getImage() {
@@ -143,11 +152,11 @@ public class User {
         this.intro = intro;
     }
 
-    public String getBusiness() {
+    public ArrayList<Tag> getBusiness() {
         return business;
     }
 
-    public void setBusiness(String business) {
+    public void setBusiness(ArrayList<Tag> business) {
         this.business = business;
     }
 

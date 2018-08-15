@@ -2,9 +2,11 @@ package com.softgrid.shortvideo.info;
 
 import android.content.Context;
 import com.softgrid.shortvideo.TabActivity;
+import com.softgrid.shortvideo.model.Bespoke;
 import com.softgrid.shortvideo.model.Building;
+import com.softgrid.shortvideo.model.Loans;
+import com.softgrid.shortvideo.model.Transaction;
 import com.softgrid.shortvideo.model.User;
-
 
 public class Bridge {
 
@@ -13,7 +15,10 @@ public class Bridge {
 	private TabActivity mainActivity;
 
 	public Building building;
-	private User user;
+	public User user;
+	public Loans loans;
+	public Transaction transaction;
+	public Bespoke bespoke;
 	
 	private Bridge(){
 
@@ -60,7 +65,32 @@ public class Bridge {
 	 * */
 	public void showUser(Context context, User user){
 		this.user = user;
+		gotoFragment(TabActivity.FRAG_USER);
 
+	}
+
+	/**
+	 * 显示贷款详情
+	 * */
+	public void showLoan(Context context, Loans loans){
+		this.loans = loans;
+		gotoFragment(TabActivity.FRAG_LoanDetail);
+	}
+
+	/**
+	 * 显示交易详情
+	 * */
+	public void showTransaction(Context context, Transaction transaction){
+		this.transaction = transaction;
+		gotoFragment(TabActivity.FRAG_TransactionDetail);
+	}
+
+	/**
+	 * 显示预约详情
+	 * */
+	public void showBespoke(Context context, Bespoke bespoke){
+		this.bespoke = bespoke;
+		gotoFragment(TabActivity.FRAG_BespokeDetail);
 	}
 
 

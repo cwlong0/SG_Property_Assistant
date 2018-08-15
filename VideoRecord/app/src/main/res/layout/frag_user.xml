@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_bg"
+        android:orientation="vertical">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--底部操作栏-->
+            <LinearLayout
+                android:id="@+id/user_bottom_layout"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="60dip"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dip"
+                    android:background="@color/line_color"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <!--咨询-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dip"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+                        <com.softgrid.shortvideo.customView.CImageView
+                            android:id="@+id/user_bottom_call_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/fc_following_buttonphonecall"/>
+                        <TextView
+                            android:id="@+id/user_bottom_call_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dip"
+                            android:layout_gravity="center_horizontal"
+                            android:singleLine="true"
+                            android:textColor="@color/color_detail"
+                            android:text="@string/call"
+                            android:textSize="13dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dip"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!--微信-->
+                        <FrameLayout
+                            android:id="@+id/user_wechat_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="16dip"
+                            android:layout_marginRight="16dip"
+                            android:layout_gravity="center"
+                            android:background="@drawable/button_red"
+                            android:layout_alignParentRight="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:text="@string/wechat"/>
+                        </FrameLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
+                android:fadingEdge="none"
+                android:overScrollMode="never"
+                android:fastScrollEnabled="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:smoothScrollbar="true"
+                android:layout_above="@id/user_bottom_layout">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dip"
+                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="10dip">
+
+                        <com.softgrid.shortvideo.customView.CircleImageView
+                            android:id="@+id/user_icon"
+                            android:layout_width="45dip"
+                            android:layout_height="45dip"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/fc_boy_headdefault"
+                            android:scaleType="centerCrop"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="10dip"
+                            android:layout_toRightOf="@id/user_icon"
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/user_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14sp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/color_text"
+                                    android:text="田峰"/>
+
+                                <ImageView
+                                    android:id="@+id/user_stars"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="15dip"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/fc_stars_04"/>
+
+                            </LinearLayout>
+                            <TextView
+                                android:id="@+id/user_company"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="11sp"
+                                android:singleLine="true"
+                                android:textColor="@color/color_detail"
+                                android:text="链家高新店"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <!--tag-->
+                    <com.softgrid.shortvideo.customView.FlowLayout
+                        android:id="@+id/user_flow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="64dip"
+                        android:layout_marginRight="10dip"
+                        android:layout_marginTop="3dip"
+                        android:layout_marginBottom="10dip"
+                        app:itemColor="@color/color_detail"
+                        app:itemSize="10sp"
+                        app:textPaddingH ="5dp"
+                        app:textPaddingV ="2dp"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="8dip"
+                        android:background="@color/line_color"
+                        />
+
+                    <!--业务范围-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="44dip"
+                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="10dip"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:text="@string/business_space"/>
+
+                    </RelativeLayout>
+
+                    <!--业务tag-->
+                    <com.softgrid.shortvideo.customView.FlowLayout
+                        android:id="@+id/user_business_flow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="10dip"
+                        android:layout_marginBottom="10dip"
+                        app:itemColor="@color/color_detail"
+                        app:itemSize="12sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="8dip"
+                        android:background="@color/line_color"
+                        />
+
+                    <!--介绍-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="44dip"
+                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="10dip"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:text="@string/intro"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/user_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="10dip"
+                        android:layout_marginBottom="10dip"
+                        android:textSize="13sp"
+                        android:textColor="@color/color_detail"
+                        android:text="朗诗熙华府开盘,优惠高达20万元,全程0元一对一定制服务,全国1000+合作楼盘,20万套房源任您挑选,朗诗熙华府开盘,7个购房者中4个用「居理新房」"/>
+
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

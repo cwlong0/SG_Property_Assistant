@@ -9,18 +9,17 @@ import com.softgrid.shortvideo.R;
 import com.softgrid.shortvideo.info.Bridge;
 
 /**
- * Created by tianfeng on 2017/12/10.
+ * Created by tianfeng on 2018/7/16.
  */
 
-public class FragmentIntermediaryDetail extends BaseFragment {
-
+public class FragmentBasic extends BaseFragment {
 
     private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
-        View view = inflater.inflate(R.layout.frag_intermediary_list, container, false);
+        View view = inflater.inflate(R.layout.tab_me, container, false);
         initUI(view);
         addActions();
         initData();
@@ -63,8 +62,6 @@ public class FragmentIntermediaryDetail extends BaseFragment {
         leftImage.setImageResource(R.drawable.fc_nav_back);
         rightImage.setImageResource(R.drawable.fc_nav_back);
         rightImage.setVisibility(View.INVISIBLE);
-
-
     }
 
     private void addActions(){
@@ -72,9 +69,7 @@ public class FragmentIntermediaryDetail extends BaseFragment {
     }
 
     public void initData(){
-        titleText.setText(R.string.intermediary_recommend);
-
-
+        titleText.setText(R.string.tab_4);
     }
 
     private void updateUI(){

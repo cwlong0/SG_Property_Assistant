@@ -21,14 +21,14 @@ public class Building {
     private int decorate;                    //装修等级
     private int orientation;                 //朝向
     private String thumbnail;                //缩略图
+    private String original;                 //原始图片
     private ArrayList<WebImage> images;      //图片
     private int region;                      //所在大区
     private int pd;                          //所在区
-    private String adress;
+    private String address;
     private float longitude;                 //经度
     private float latitude;                  //纬度
     private long openTime;                   //开盘时间
-    private int status;                      //新盘状态，1=等待摇号，2=摇号中，3=尾盘，4=售罄
     private String area;
     private float unitPrice;
     private float totalPrice;
@@ -37,10 +37,12 @@ public class Building {
     private ArrayList<Tag> featuresTags;
     private String featureStr;
     private String desc;
-    private int inTransaction;
+    private int status;
     private int followCount;
     private long createAt;
     private long updateAt;
+
+    private boolean isValid = true;
 
     public Building(){
 
@@ -48,6 +50,8 @@ public class Building {
 
     public Building(boolean test){
         if (test){
+
+            isValid = new Random().nextInt(2) > 0;
             type = 1;
             featuresTags = new ArrayList<>();
             featuresTags.add(new Tag(true));
@@ -67,9 +71,10 @@ public class Building {
             number = "20-1";
             region = new Random().nextInt(3) + 1;
             pd = new Random().nextInt(27) + 1;
-            adress = "成都市高新区大源";
+            address = "成都市高新区大源";
             floor = new Random().nextInt(34) + 1;
             thumbnail = "http://fdfs.xmcdn.com/group23/M01/15/2B/wKgJL1gYYjzxW7fQAAWaMAvliP8961_mobile_meduim.jpg";
+            original = "http://fdfs.xmcdn.com/group23/M01/15/2B/wKgJL1gYYjzxW7fQAAWaMAvliP8961_mobile_meduim.jpg";
             decorate = new Random().nextInt(4) + 1;
             orientation = new Random().nextInt(7) + 1;
             followCount = new Random().nextInt(999);
@@ -195,6 +200,14 @@ public class Building {
         this.thumbnail = thumbnail;
     }
 
+    public String getOriginal() {
+        return original;
+    }
+
+    public void setOriginal(String original) {
+        this.original = original;
+    }
+
     public ArrayList<WebImage> getImages() {
         return images;
     }
@@ -219,12 +232,12 @@ public class Building {
         this.pd = pd;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public float getLongitude() {
@@ -323,13 +336,7 @@ public class Building {
         this.desc = desc;
     }
 
-    public int getInTransaction() {
-        return inTransaction;
-    }
 
-    public void setInTransaction(int inTransaction) {
-        this.inTransaction = inTransaction;
-    }
 
     public int getFollowCount() {
         return followCount;
@@ -353,5 +360,13 @@ public class Building {
 
     public void setUpdateAt(long updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 }

@@ -136,10 +136,14 @@ public class FragmentBuildingDetail extends BaseFragment {
             }
         }
         else if(v == mSubscribeBtn){
-            Toast.makeText(getActivity(), "预约看房", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "预约看房", Toast.LENGTH_SHORT).show();
+            Bridge.getInstance().building = building;
+            Bridge.getInstance().gotoFragment(TabActivity.FRAG_Bespoke);
         }
         else if(v == mTakeUpBtn){
-            Toast.makeText(getActivity(), "申请认购", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "申请认购", Toast.LENGTH_SHORT).show();
+            Bridge.getInstance().building = building;
+            Bridge.getInstance().gotoFragment(TabActivity.FRAG_Buy);
         }
         else if(v == mLoanConsultText){
             Toast.makeText(getActivity(), "贷款咨询", Toast.LENGTH_SHORT).show();
@@ -391,13 +395,13 @@ public class FragmentBuildingDetail extends BaseFragment {
             mOneTwoDescText.setText(getString(R.string.type_flat));
             mTwoOneDescText.setText(building.getFloor() + getString(R.string.floor));
             mTwoTwoDescText.setText(AppHelper.getInstance().getDecorate(getActivity(), building.getDecorate()));
-            mThreeOneDescText.setText(AppHelper.getInstance().stampToDateString(getActivity(), building.getOpenTime(), "yyyy-MM-dd"));
+            mThreeOneDescText.setText(AppHelper.getInstance().stampToDateString(building.getOpenTime(), "yyyy-MM-dd"));
             mThreeTwoDescText.setTextColor(getActivity().getResources().getColor(R.color.color_text));
             mThreeTwoDescText.setText(AppHelper.getInstance().getOrientation(getActivity(), building.getOrientation()));
-            mFourOneDescText.setText(AppHelper.getInstance().stampToDateString(getActivity(), building.getCreateAt(), "yyyy-MM-dd"));
+            mFourOneDescText.setText(AppHelper.getInstance().stampToDateString(building.getCreateAt(), "yyyy-MM-dd"));
             mFourTwoDescText.setVisibility(View.VISIBLE);
             mFourTwoDescText.setText(R.string.loan_and_total);
-            mFiveDescText.setText(building.getAdress());
+            mFiveDescText.setText(building.getAddress());
         }
         else {
             mTypeImage.setVisibility(View.VISIBLE);
@@ -418,14 +422,14 @@ public class FragmentBuildingDetail extends BaseFragment {
             mTwoOneDescText.setText(building.getFloor() + getString(R.string.floor));
             mTwoTwoDescText.setText(AppHelper.getInstance().getDecorate(getActivity(),
                     building.getDecorate()));
-            mThreeOneDescText.setText(AppHelper.getInstance().stampToDateString(getActivity(),
+            mThreeOneDescText.setText(AppHelper.getInstance().stampToDateString(
                     building.getCreateAt(), "yyyy-MM-dd"));
             mThreeTwoDescText.setTextColor(getActivity().getResources().getColor(R.color.color_link));
             mThreeTwoDescText.setText(R.string.loan_and_total);
-            mFourOneDescText.setText(AppHelper.getInstance().stampToDateString(getActivity(),
+            mFourOneDescText.setText(AppHelper.getInstance().stampToDateString(
                     building.getOpenTime(), "yyyy-MM-dd"));
             mFourTwoDescText.setVisibility(View.GONE);
-            mFiveDescText.setText(building.getAdress());
+            mFiveDescText.setText(building.getAddress());
         }
     }
 }

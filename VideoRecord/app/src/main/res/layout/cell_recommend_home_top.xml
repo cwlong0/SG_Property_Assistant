@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="8dip"
+            android:layout_marginBottom="20dip"
             android:layout_marginRight="5dip"
             android:paddingLeft="7dip"
             android:paddingRight="7dip"

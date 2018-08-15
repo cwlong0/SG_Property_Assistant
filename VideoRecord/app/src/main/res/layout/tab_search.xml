@@ -1,19 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <include layout="@layout/title_bar" />
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/title_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/main_bg"
-        android:orientation="vertical">
+        android:layout_height="64dip"
+        android:background="@color/main_top">
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="44dip"
+            >
+            <RelativeLayout
+                android:id="@+id/input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main_top"
+                android:padding="8dip" >
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="2dip" >
+
+                    <EditText
+                        android:id="@+id/input_box"
+                        android:layout_width="0dip"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="@string/input_keywords_prompt"
+                        android:imeOptions="actionSearch"
+                        android:lines="1"
+                        android:textColor="@color/color_text"
+                        android:textSize="14dip" />
+
+                    <com.softgrid.shortvideo.customView.CImageView
+                        android:id="@+id/del_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/coll_sruew_close"
+                        android:visibility="gone"
+                        />
+
+                    <ImageView
+                        android:id="@+id/search_line"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dip"
+                        android:layout_marginRight="4dip"
+                        android:src="@drawable/coll_sruew_line"
+                        android:visibility="visible" />
+
+                    <com.softgrid.shortvideo.customView.CImageView
+                        android:id="@+id/search_ico"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/coll_sruew_ban"
+                        android:visibility="visible" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <!--switch切换-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dip"
+                android:background="@color/white"
+                >
+                <LinearLayout
+                    android:id="@+id/switch_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginRight="20dip"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/switch_left_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/switch_left">
+                        <TextView
+                            android:id="@+id/switch_left_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textColor="@drawable/switch_color"
+                            android:textSize="16sp"
+                            android:text="@string/building_new"/>
+                    </FrameLayout>
+
+
+                    <FrameLayout
+                        android:id="@+id/switch_right_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/switch_right">
+                        <TextView
+                            android:id="@+id/switch_right_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textColor="@drawable/switch_color"
+                            android:textSize="16sp"
+                            android:text="@string/building_resale"/>
+                    </FrameLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!--条件筛选区域-->
+            <LinearLayout
+                android:id="@+id/type_layout"
+                android:layout_width="match_parent"
+                android:layout_height="35dip"
+                android:background="@color/type_bg"
+                android:orientation="vertical" >
+
+
+            </LinearLayout>
+
+            <!--数据区域-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.handmark.pulltorefresh.library.PullToRefreshListView
+                    android:id="@+id/data_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cacheColorHint="#00000000"
+                    android:divider="@color/main_bg"
+                    android:dividerHeight="0.5dip"
+                    android:listSelector="@drawable/color_white"
+                    android:fadingEdge="none"
+                    android:overScrollMode="never"
+                    android:fastScrollEnabled="false"
+                    android:footerDividersEnabled="false"
+                    android:headerDividersEnabled="false"
+                    android:smoothScrollbar="true"/>
+                <include layout="@layout/prompt_view" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!--搜索联想-->
+        <ListView
+            android:id="@+id/keyword_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/main_bg"
+            android:dividerHeight="0.5dip"
+            android:listSelector="@drawable/color_white"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:background="@color/white"
+            android:smoothScrollbar="true"
+            android:visibility="gone"/>
+        <!--热门搜索-->
+        <LinearLayout
+            android:id="@+id/flow_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:layout_marginLeft="8dip"
+                android:lines="1"
+                android:textColor="@color/color_detail"
+                android:text="@string/search_hot"
+                android:textSize="13dip" />
+
+            <com.softgrid.shortvideo.customView.FlowLayout
+                android:id="@+id/flow_hot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dip"
+                app:itemColor="@color/color_text"
+                app:itemSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dip"
+                android:background="@color/main_bg"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:layout_marginLeft="8dip">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:textColor="@color/color_detail"
+                    android:text="@string/search_his"
+                    android:textSize="13dip" />
+                <TextView
+                    android:id="@+id/his_clear_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="8dip"
+                    android:paddingRight="8dip"
+                    android:lines="1"
+                    android:textColor="@color/main_top"
+                    android:text="@string/clear"
+                    android:textSize="13dip" />
+            </RelativeLayout>
+
+            <com.softgrid.shortvideo.customView.FlowLayout
+                android:id="@+id/flow_his"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dip"
+                app:itemColor="@color/color_text"
+                app:itemSize="13sp" />
+        </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

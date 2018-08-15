@@ -4,9 +4,10 @@ import android.content.Context;
 
 import com.softgrid.shortvideo.callback.CallBackListener;
 import com.softgrid.shortvideo.model.Banner;
+import com.softgrid.shortvideo.model.Bespoke;
 import com.softgrid.shortvideo.model.Building;
 import com.softgrid.shortvideo.model.Loans;
-import com.softgrid.shortvideo.model.Notice;
+import com.softgrid.shortvideo.model.Msg;
 import com.softgrid.shortvideo.model.SearchCondition;
 import com.softgrid.shortvideo.model.Tag;
 import com.softgrid.shortvideo.model.Transaction;
@@ -102,7 +103,15 @@ public interface INetLogic {
     void getFollow(Context context, int page, CallBackListener<ArrayList<Building>> listener);
 
     /**
-     * 申购房产
+     * 预约看房
+     * */
+    void bespokeBuilding(Context context, Bespoke bespoke, CallBackListener<Bespoke> listener);
+
+    /**获取预约列表*/
+    void getBespoke(Context context, int page, CallBackListener<ArrayList<Bespoke>> listener);
+
+    /**
+     * 购买房产
      * */
     void bookBuilding(Context context, Transaction transaction, CallBackListener<Transaction> listener);
 
@@ -137,7 +146,7 @@ public interface INetLogic {
     /**
      * 获取通知
      * */
-    void getNotice(Context context, int page, CallBackListener<ArrayList<Notice>> listener);
+    void getNotice(Context context, int page, CallBackListener<ArrayList<Msg>> listener);
 
     /**
      * 获取配置tag

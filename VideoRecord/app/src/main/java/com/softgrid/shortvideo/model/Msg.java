@@ -4,7 +4,7 @@ package com.softgrid.shortvideo.model;
  * Created by tianfeng on 2018/6/6.
  */
 
-public class Notice {
+public class Msg {
 
     private int id;
     private int type;
@@ -13,8 +13,13 @@ public class Notice {
     private String title;
     private String desc;
     private int isRead;
+    private int status;
     private long createAt;
     private  long updateAt;
+
+    public Msg(boolean test){
+
+    }
 
     public int getId() {
         return id;
@@ -70,6 +75,14 @@ public class Notice {
 
     public void setIsRead(int isRead) {
         this.isRead = isRead;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public long getCreateAt() {

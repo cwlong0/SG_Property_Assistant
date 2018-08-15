@@ -2,6 +2,14 @@
     <string name="app_name">ShortVideo</string>
     <string name="area_unit">㎡</string>
 
+    <string name="banker">Banker</string>
+    <string name="banker_recommend">Banker推荐</string>
+    <string name="bespoke">预约</string>
+    <string name="bespoke_detail">预约详情</string>
+    <string name="bespoke_see">预约看房</string>
+    <string name="bespoke_see_time">看房时间</string>
+    <string name="bespoke_see_time_tips">请务必填写准确时间，以便系统给您提醒哦~</string>
+    <string name="business_space">业务范围</string>
     <string name="building_new">新房</string>
     <string name="building_resale">二手房</string>
     <string name="building_detail">房产详情</string>
@@ -19,10 +27,16 @@
     <string name="basic_address">地址</string>
     <string name="basic_opentime">摇号时间</string>
 
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="call">电话</string>
     <string name="consult">咨询</string>
     <string name="consult_intermediary">咨询中介</string>
     <string name="contacts">联系人</string>
+    <string name="clear">Clear</string>
 
+    <string name="delete">删除</string>
+    <string name="detail">详细</string>
     <string name="decorate_0">其他</string>
     <string name="decorate_1">毛坯</string>
     <string name="decorate_2">简装</string>
@@ -33,13 +47,35 @@
     <string name="follower">收藏</string>
     <string name="feature">特色</string>
     <string name="floor">层</string>
+    <string name="file">归档</string>
 
+    <string name="input_keywords_prompt">Please input keywords…</string>
+    <string name="invalid">已失效</string>
+    <string name="intro">介绍</string>
     <string name="intermediary">中介</string>
     <string name="intermediary_recommend">中介推荐</string>
 
     <string name="loan">贷款</string>
+    <string name="loan2">贷款:</string>
+    <string name="loan_detail">贷款详情</string>
+    <string name="loan_status">贷款状态</string>
+    <string name="loan_year">贷款年限</string>
+    <string name="loan_money">贷款金额</string>
+    <string name="loan_year2">贷款年限:</string>
+    <string name="loan_money2">贷款金额:</string>
+    <string name="loan_or_not">是否贷款</string>
+    <string name="loan_reckon">贷款计算器</string>
     <string name="loan_consult">贷款咨询？</string>
     <string name="loan_and_total">总价和贷款>></string>
+    <string name="login">登录</string>
+    <string name="logout">退出登录</string>
+    <string name="lawyer">律师</string>
+    <string name="lawyer_recommend">律师推荐</string>
+
+    <string name="my_collection">我的收藏</string>
+    <string name="my_transaction">我的交易</string>
+    <string name="my_loan">我的贷款</string>
+    <string name="my_bespoke">我的预约</string>
 
     <string name="no_data">没有数据</string>
 
@@ -59,12 +95,20 @@
     <string name="price_total_2">元</string>
 
     <string name="q_a">问答</string>
+    <string name="qa">常见问题</string>
 
     <string name="rank_new">新房推荐</string>
     <string name="rank_resale">二手房推荐</string>
     <string name="room_unit">rooms</string>
     <string name="ren">人</string>
+    <string name="recommend_lawyer">推荐律师</string>
+    <string name="recommend_banker">推荐Banker</string>
+    <string name="recommend_intermediary">推荐中介</string>
 
+    <string name="search_his">You searched</string>
+    <string name="search_hot">Hot search</string>
+    <string name="status">状态</string>
+    <string name="status2">状态：</string>
     <string name="subscribe_look">预约看房</string>
     <string name="status_1">等待摇号</string>
     <string name="status_2">摇号中</string>
@@ -72,15 +116,26 @@
     <string name="status_4">售罄</string>
     <string name="search_tips">搜索楼盘/街道/开发商</string>
 
+    <string name="transaction">交易</string>
+    <string name="transaction_detail">交易详情</string>
+    <string name="transaction_status">交易状态</string>
+    <string name="tips">温馨提示</string>
+    <string name="tips_bespoke">本系统目前只提供流程记录与提醒，并不能直接线上进行预约看房/认购/申请贷款等哦。请线下完成相关事项后，再通过本系统记录哦。</string>
     <string name="type_flat">公寓</string>
     <string name="take_up">申请认购</string>
+    <string name="take_up_time">成交时间</string>
+    <string name="take_up_money">成交价格</string>
     <string name="type_new">新</string>
     <string name="tab_1">首页</string>
     <string name="tab_2">搜索</string>
     <string name="tab_3">消息</string>
     <string name="tab_4">我的</string>
 
-    <string name="wan">万</string>
+    <string name="update">修改</string>
 
+    <string name="wan">万</string>
+    <string name="wechat">微信</string>
+
+    <string name="year">年</string>
 
 </resources>

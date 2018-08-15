@@ -1,5 +1,7 @@
 package com.softgrid.shortvideo.model;
 
+import java.util.Random;
+
 /**
  * Created by tianfeng on 2018/6/5.
  */
@@ -15,8 +17,25 @@ public class Loans {
     private Building building;
     private Transaction transaction;
     private User banker;
+    private long requestTime;
     private long createAt;
     private long updateAt;
+
+    public Loans(){}
+
+    public Loans(boolean test){
+
+        code = new Random().nextInt(5) + 1;
+        desc = "贷款描述，由贷款的code决定具体描述文本。";
+        total = 2000000;
+        year = 30;
+        building = new Building(true);
+        transaction = new Transaction();
+        banker = new User(true);
+        requestTime = System.currentTimeMillis();
+        createAt = System.currentTimeMillis();
+        updateAt = System.currentTimeMillis();
+    }
 
     public String getId() {
         return id;
@@ -80,6 +99,14 @@ public class Loans {
 
     public void setBanker(User banker) {
         this.banker = banker;
+    }
+
+    public long getRequestTime() {
+        return requestTime;
+    }
+
+    public void setRequestTime(long requestTime) {
+        this.requestTime = requestTime;
     }
 
     public long getCreateAt() {

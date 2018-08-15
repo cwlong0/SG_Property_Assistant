@@ -12,9 +12,10 @@ import com.softgrid.shortvideo.http.HttpRequestInfo;
 import com.softgrid.shortvideo.iLogic.INetLogic;
 import com.softgrid.shortvideo.info.UserInfo;
 import com.softgrid.shortvideo.model.Banner;
+import com.softgrid.shortvideo.model.Bespoke;
 import com.softgrid.shortvideo.model.Building;
 import com.softgrid.shortvideo.model.Loans;
-import com.softgrid.shortvideo.model.Notice;
+import com.softgrid.shortvideo.model.Msg;
 import com.softgrid.shortvideo.model.SearchCondition;
 import com.softgrid.shortvideo.model.Tag;
 import com.softgrid.shortvideo.model.Transaction;
@@ -472,8 +473,8 @@ public class NetLogicImpl implements INetLogic {
             if (user.getTel2() != null){
                 params.put("tel2", user.getTel2());
             }
-            if (user.getAdress() != null){
-                params.put("adress", user.getAdress());
+            if (user.getAddress() != null){
+                params.put("address", user.getAddress());
             }
             if (user.getImage() != null){
                 params.put("image", user.getImage());
@@ -1044,8 +1045,190 @@ public class NetLogicImpl implements INetLogic {
 
                 }
                 finally {
+
+                    ArrayList<Building> dataList = new ArrayList<>();
+                    for (int i = 0; i < 10; i++){
+                        dataList.add(new Building(true));
+                    }
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
                     msg.obj = hashMap;
                     handler.sendMessage(msg);
+
+//                    msg.obj = hashMap;
+//                    handler.sendMessage(msg);
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void bespokeBuilding(final Context context, Bespoke bespoke, final CallBackListener<Bespoke> listener) {
+        String body = null;
+        try {
+            JSONObject params = new JSONObject();
+
+            params.put("id", bespoke.getBuilding().getId());
+            params.put("bespokeTime", bespoke.getBespokeTime());
+            if (bespoke.getIntermediary() != null){
+                params.put("intermediary", bespoke.getIntermediary().getId());
+            }
+
+            String paramsString = params.toString();
+
+            body = HttpRequestInfo.getInstance()
+                    .getRequestParams(context, "bespoke/create", paramsString);
+
+            //加密
+            body = SecurityTool.encodeStatic(body);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        MediaType mediaType = MediaType.parse(HttpRequestInfo.MEDIA_TYPE_DEF);
+        Request request = new Request.Builder()
+                .url(HttpRequestInfo.HOST)
+                .post(RequestBody.create(mediaType, body))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                msg.what = ERROR;
+                ErrorInfo errorInfo = new ErrorInfo(e);
+                hashMap.put(KEY_DATA, errorInfo);
+                msg.obj = hashMap;
+                handler.sendMessage(msg);
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                try{
+                    JSONObject object = new JSONObject(response.body().string());
+                    JSONObject dataObject = object.getJSONObject("d");
+
+                    Bespoke bespokeModel = gson.fromJson(dataObject.getString("info"),
+                            Bespoke.class);
+
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, bespokeModel);
+                }
+                catch (Exception e){
+
+                    msg.what = ERROR;
+                    ErrorInfo errorInfo = new ErrorInfo(e);
+                    hashMap.put(KEY_DATA, errorInfo);
+
+                }
+                finally {
+                    msg.obj = hashMap;
+                    handler.sendMessage(msg);
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void getBespoke(Context context, int page, final CallBackListener<ArrayList<Bespoke>> listener) {
+        String body = null;
+        try {
+            JSONObject params = new JSONObject();
+
+            params.put("page", page);
+            params.put("count", Constant.PAGE_COUNT);
+
+            String paramsString = params.toString();
+
+            body = HttpRequestInfo.getInstance()
+                    .getRequestParams(context, "bespoke/getBespoke", paramsString);
+
+            //加密
+            body = SecurityTool.encodeStatic(body);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        MediaType mediaType = MediaType.parse(HttpRequestInfo.MEDIA_TYPE_DEF);
+        Request request = new Request.Builder()
+                .url(HttpRequestInfo.HOST)
+                .post(RequestBody.create(mediaType, body))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                msg.what = ERROR;
+                ErrorInfo errorInfo = new ErrorInfo(e);
+                hashMap.put(KEY_DATA, errorInfo);
+                msg.obj = hashMap;
+                handler.sendMessage(msg);
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                try{
+                    JSONObject object = new JSONObject(response.body().string());
+                    JSONObject dataObject = object.getJSONObject("d");
+                    JSONArray dataArray = dataObject.getJSONArray("info");
+
+                    ArrayList<Transaction> dataList = new ArrayList<>();
+
+                    for (int i = 0; i < dataArray.length(); i++){
+
+                        JSONObject item = dataArray.getJSONObject(i);
+                        Transaction transaction = gson.fromJson(item.toString(), Transaction.class);
+                        dataList.add(transaction);
+                    }
+
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
+                }
+                catch (Exception e){
+
+                    msg.what = ERROR;
+                    ErrorInfo errorInfo = new ErrorInfo(e);
+                    hashMap.put(KEY_DATA, errorInfo);
+
+                }
+                finally {
+
+                    ArrayList<Bespoke> dataList = new ArrayList<>();
+                    for (int i = 0; i < 10; i++){
+                        dataList.add(new Bespoke(true));
+                    }
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
+                    msg.obj = hashMap;
+                    handler.sendMessage(msg);
+
+//                    msg.obj = hashMap;
+//                    handler.sendMessage(msg);
                 }
 
             }
@@ -1228,8 +1411,18 @@ public class NetLogicImpl implements INetLogic {
 
                 }
                 finally {
+
+                    ArrayList<Transaction> dataList = new ArrayList<>();
+                    for (int i = 0; i < 10; i++){
+                        dataList.add(new Transaction(true));
+                    }
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
                     msg.obj = hashMap;
                     handler.sendMessage(msg);
+
+//                    msg.obj = hashMap;
+//                    handler.sendMessage(msg);
                 }
 
             }
@@ -1620,6 +1813,15 @@ public class NetLogicImpl implements INetLogic {
 
                 }
                 finally {
+//                    msg.obj = hashMap;
+//                    handler.sendMessage(msg);
+
+                    ArrayList<Loans> dataList = new ArrayList<>();
+                    for (int i = 0; i < 10; i++){
+                        dataList.add(new Loans(true));
+                    }
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
                     msg.obj = hashMap;
                     handler.sendMessage(msg);
                 }
@@ -1630,7 +1832,7 @@ public class NetLogicImpl implements INetLogic {
     }
 
     @Override
-    public void getNotice(final Context context, int page, final CallBackListener<ArrayList<Notice>> listener) {
+    public void getNotice(final Context context, int page, final CallBackListener<ArrayList<Msg>> listener) {
 
         String body = null;
         try {
@@ -1685,12 +1887,12 @@ public class NetLogicImpl implements INetLogic {
                     JSONObject dataObject = object.getJSONObject("d");
                     JSONArray dataArray = dataObject.getJSONArray("info");
 
-                    ArrayList<Notice> dataList = new ArrayList<>();
+                    ArrayList<Msg> dataList = new ArrayList<>();
 
                     for (int i = 0; i < dataArray.length(); i++){
 
                         JSONObject item = dataArray.getJSONObject(i);
-                        Notice notice = gson.fromJson(item.toString(), Notice.class);
+                        Msg notice = gson.fromJson(item.toString(), Msg.class);
                         dataList.add(notice);
                     }
 
@@ -1705,8 +1907,18 @@ public class NetLogicImpl implements INetLogic {
 
                 }
                 finally {
+
+                    ArrayList<Msg> dataList = new ArrayList<>();
+                    for (int i = 0; i < 10; i++){
+                        dataList.add(new Msg(true));
+                    }
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
                     msg.obj = hashMap;
                     handler.sendMessage(msg);
+
+//                    msg.obj = hashMap;
+//                    handler.sendMessage(msg);
                 }
 
             }

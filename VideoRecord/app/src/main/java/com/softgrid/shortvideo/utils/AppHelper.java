@@ -1,7 +1,13 @@
 package com.softgrid.shortvideo.utils;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Environment;
+import android.view.View;
+import android.widget.PopupWindow;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
@@ -22,6 +28,7 @@ public class AppHelper {
 
     private RequestOptions userOptions;
     private RequestOptions imageOptions;
+    private RequestOptions bannerOptions;
 
     private AppHelper(){
 
@@ -37,6 +44,13 @@ public class AppHelper {
                 .placeholder(R.drawable.fc_boy_headdefault)
                 .error(R.drawable.fc_boy_headdefault)
                 .priority(Priority.HIGH);
+
+        bannerOptions = new RequestOptions()
+                .fitCenter()
+                .placeholder(R.drawable.fc_banner_placeholder)
+                .error(R.drawable.fc_banner_placeholder)
+                .priority(Priority.HIGH);
+
     }
 
     public static AppHelper getInstance() {
@@ -54,6 +68,9 @@ public class AppHelper {
         return imageOptions;
     }
 
+    public RequestOptions getBannerOptions() {
+        return bannerOptions;
+    }
 
     public String formatPrice(Context context, float price, String unit){
         String sPrice = "";
@@ -67,11 +84,25 @@ public class AppHelper {
         return sPrice;
     }
 
-    public String stampToDateString(Context context, long timeStamp, String format){
+    public String stampToDateString(long timeStamp, String format){
 
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         String dateString = dateFormat.format(new Date(timeStamp));
         return dateString;
+    }
+
+    public long dateStringToStamp(String dateString, String format){
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        try {
+            Date date = dateFormat.parse(dateString);
+            long time = date.getTime();
+            return time;
+        }
+        catch (Exception e){
+            return 0;
+        }
+
     }
 
     /**根据状态获取状态描述*/
@@ -173,5 +204,54 @@ public class AppHelper {
             dir.mkdirs();
         }
         return path;
+    }
+
+    /**
+     * popupWindow菜单弹出动画
+     *
+     * @param view 做出动画的view
+     *
+     * @param popupWindow 菜单
+     *
+     * @param show  显示或者隐藏
+     *
+     * */
+    public void startAnimation(Activity activity, View view, final PopupWindow popupWindow, final boolean show) {
+        int start = 0;
+        int end = 0;
+        if (show) {
+            start = DeviceInfoTool.getScreenHeight(activity);
+        } else {
+            end = DeviceInfoTool.getScreenHeight(activity);
+        }
+        ObjectAnimator startAnimation = ObjectAnimator.ofFloat(view, "translationY", start, end);
+        startAnimation.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (!show) {
+                    popupWindow.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        AnimatorSet set = new AnimatorSet();
+        set.setDuration(300);
+        set.play(startAnimation);
+        set.start();
     }
 }

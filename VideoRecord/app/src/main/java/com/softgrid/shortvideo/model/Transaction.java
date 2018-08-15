@@ -22,6 +22,24 @@ public class Transaction {
     private long createAt;
     private long updateAt;
 
+    public Transaction(){
+
+    }
+
+    public Transaction(boolean test){
+        building = new Building(true);
+        type = building.getIsResale();
+        total = 3000000;
+        buyer = new User(true);
+        seller = new User(true);
+        lawyer = new User(true);
+        intermediary = new User(true);
+        status = new TransactionStatus();
+        buyTime = System.currentTimeMillis();
+        contractTime = System.currentTimeMillis();
+        loans = new Loans(true);
+    }
+
     public String getId() {
         return id;
     }

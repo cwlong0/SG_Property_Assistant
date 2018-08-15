@@ -12,8 +12,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.softgrid.shortvideo.fragment.FragmentBankerList;
+import com.softgrid.shortvideo.fragment.FragmentBespoke;
+import com.softgrid.shortvideo.fragment.FragmentBespokeDetail;
+import com.softgrid.shortvideo.fragment.FragmentBespokeList;
 import com.softgrid.shortvideo.fragment.FragmentBuildingDetail;
+import com.softgrid.shortvideo.fragment.FragmentBuy;
+import com.softgrid.shortvideo.fragment.FragmentCollectionList;
 import com.softgrid.shortvideo.fragment.FragmentIntermediaryList;
+import com.softgrid.shortvideo.fragment.FragmentLawyerList;
+import com.softgrid.shortvideo.fragment.FragmentLoanDetail;
+import com.softgrid.shortvideo.fragment.FragmentLoanList;
+import com.softgrid.shortvideo.fragment.FragmentTransactionDetail;
+import com.softgrid.shortvideo.fragment.FragmentTransactionList;
+import com.softgrid.shortvideo.fragment.FragmentUserDetail;
 import com.softgrid.shortvideo.fragment.TabHomeFragment;
 import com.softgrid.shortvideo.fragment.TabMeFragment;
 import com.softgrid.shortvideo.fragment.TabMsgFragment;
@@ -34,7 +46,20 @@ public class TabActivity extends FragmentActivity implements View.OnClickListene
     public static final int TAB_ME = 4;
 
     public static final int FRAG_BUILDING = 100;
+    public static final int FRAG_Bespoke = 110;
+    public static final int FRAG_Buy = 120;
     public static final int FRAG_IntermediaryList = 200;
+    public static final int FRAG_LawyerList = 201;
+    public static final int FRAG_BankerList = 202;
+    public static final int FRAG_USER = 210;
+    public static final int FRAG_CollectionList = 400;
+    public static final int FRAG_LoanList = 401;
+    public static final int FRAG_TransactionList = 402;
+    public static final int FRAG_BespokeList = 403;
+
+    public static final int FRAG_LoanDetail = 500;
+    public static final int FRAG_TransactionDetail = 501;
+    public static final int FRAG_BespokeDetail = 502;
 
     private RelativeLayout mHomeLayout;
     private RelativeLayout mSearchLayout;
@@ -250,8 +275,68 @@ public class TabActivity extends FragmentActivity implements View.OnClickListene
             taskList.add(0, fragment);
             transaction.add(R.id.content, fragment);
         }
+        else if (type == FRAG_Bespoke){
+            Fragment fragment = new FragmentBespoke();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_Buy){
+            Fragment fragment = new FragmentBuy();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
         else if (type == FRAG_IntermediaryList){
             Fragment fragment = new FragmentIntermediaryList();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_BankerList){
+            Fragment fragment = new FragmentBankerList();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_LawyerList){
+            Fragment fragment = new FragmentLawyerList();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_USER){
+            Fragment fragment = new FragmentUserDetail();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_CollectionList){
+            Fragment fragment = new FragmentCollectionList();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_TransactionList){
+            Fragment fragment = new FragmentTransactionList();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_LoanList){
+            Fragment fragment = new FragmentLoanList();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_BespokeList){
+            Fragment fragment = new FragmentBespokeList();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_LoanDetail){
+            Fragment fragment = new FragmentLoanDetail();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_TransactionDetail){
+            Fragment fragment = new FragmentTransactionDetail();
+            taskList.add(0, fragment);
+            transaction.add(R.id.content, fragment);
+        }
+        else if (type == FRAG_BespokeDetail){
+            Fragment fragment = new FragmentBespokeDetail();
             taskList.add(0, fragment);
             transaction.add(R.id.content, fragment);
         }

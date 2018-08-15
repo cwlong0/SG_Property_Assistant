@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.softgrid.shortvideo.R;
 import com.softgrid.shortvideo.customView.CImageView;
 import com.softgrid.shortvideo.model.Banner;
+import com.softgrid.shortvideo.utils.AppHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,8 +33,6 @@ public class BannerAdapter extends PagerAdapter {
     private ViewPager viewPager;
     private List<Banner> dataList;
 
-    private RequestOptions options;
-
     private int currentPos;
 
     private boolean touch;
@@ -44,12 +43,6 @@ public class BannerAdapter extends PagerAdapter {
         this.context = context;
         this.dataList = new ArrayList<>();
         this.viewPager = viewPager;
-
-        options = new RequestOptions()
-                .fitCenter()
-                .placeholder(R.drawable.fc_banner_placeholder)
-                .error(R.drawable.fc_banner_placeholder)
-                .priority(Priority.HIGH);
 
         currentPos = 0;
         handler = new Handler(){
@@ -148,7 +141,7 @@ public class BannerAdapter extends PagerAdapter {
 
         Glide.with(context.getApplicationContext())
                 .load(Uri.parse(banner.getBannerUrl()))
-                .apply(options)
+                .apply(AppHelper.getInstance().getBannerOptions())
                 .into(imageView);
 
         return imageView;

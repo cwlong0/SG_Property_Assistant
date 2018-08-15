@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#FFDA3838</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
@@ -15,12 +15,15 @@
     <color name="white">#ffffffff</color>
     <color name="black">#000000</color>
     <color name="gray">#808080</color>
+    <color name="green">#00787D</color>
+    <color name="yellow">#ECB76B</color>
     <color name="transparent_background">#05000000</color>
     <color name="transparent_clicked">#c0ffffff</color>
     <color name="transparent">#00000000</color>
     <color name="gainsboro">#fff7f9f8</color>
 
     <color name="color_text">#000000</color>
+    <color name="color_text2">#3B3B3B</color>
     <color name="color_detail">#979797</color>
     <color name="color_link">#3F51B5</color>
 

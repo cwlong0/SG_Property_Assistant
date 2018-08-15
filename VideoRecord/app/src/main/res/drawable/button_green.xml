@@ -6,13 +6,13 @@
                 <shape>
                     <gradient android:endColor="#00787D" android:startColor="#1A9EA3" />
 
-                    <corners android:radius="3dp" />
+                    <corners android:radius="2dp" />
                 </shape>
             </item>
             <item>
                 <shape>
 
-                    <corners android:radius="3dp" />
+                    <corners android:radius="2dp" />
 
                     <solid android:color="#66000000" />
                 </shape>
