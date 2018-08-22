@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        >
+
+        <ImageView
+            android:id="@+id/keyword_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_centerVertical="true"
+            android:src="@drawable/coll_sruew_ban"/>
+
+        <TextView
+            android:id="@+id/keyword_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dip"
+            android:layout_centerVertical="true"
+            android:lines="1"
+            android:textColor="@color/color_detail"
+            android:text=""
+            android:textSize="11dip" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/keyword_type"
+            android:layout_toRightOf="@id/keyword_icon"
+            android:layout_marginLeft="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/keyword_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:textColor="@color/color_text"
+                android:text="段子来了"
+                android:textStyle="bold"
+                android:textSize="13dip" />
+            <TextView
+                android:id="@+id/keyword_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:lines="1"
+                android:textColor="@color/color_detail"
+                android:textSize="11dip" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

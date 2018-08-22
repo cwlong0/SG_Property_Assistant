@@ -191,7 +191,7 @@ public class FragmentBespoke extends BaseFragment {
                 }
             });
         }
-        datePopView.show(rootView);
+        datePopView.show(rootLayout);
     }
 
     private void updateUI(){

@@ -32,7 +32,7 @@ public class BuildingAdapter extends BaseAdapter {
 
     public BuildingAdapter(Context context){
         this.context = context;
-        itemList = new ArrayList<Building>();
+        itemList = new ArrayList();
     }
 
     public void setItemsData(ArrayList<Building> dataList){

@@ -34,6 +34,12 @@
     <string name="consult_intermediary">咨询中介</string>
     <string name="contacts">联系人</string>
     <string name="clear">Clear</string>
+    <string name="con_region">区域</string>
+    <string name="con_price">售价</string>
+    <string name="con_type">房型</string>
+    <string name="con_more">更多</string>
+    <string name="con_triangle">&#160;▼</string>
+    <string name="con_triangle_up">&#160;▲</string>
 
     <string name="delete">删除</string>
     <string name="detail">详细</string>
@@ -104,6 +110,7 @@
     <string name="recommend_lawyer">推荐律师</string>
     <string name="recommend_banker">推荐Banker</string>
     <string name="recommend_intermediary">推荐中介</string>
+    <string name="region">区</string>
 
     <string name="search_his">You searched</string>
     <string name="search_hot">Hot search</string>
@@ -132,6 +139,7 @@
     <string name="tab_4">我的</string>
 
     <string name="update">修改</string>
+    <string name="unlimited">不限</string>
 
     <string name="wan">万</string>
     <string name="wechat">微信</string>

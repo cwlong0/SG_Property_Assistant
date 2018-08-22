@@ -195,7 +195,7 @@ public class DatePopView implements View.OnClickListener{
     }
 
     public void show(View view){
-        mDatePop.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        mDatePop.showAsDropDown(view, Gravity.BOTTOM, 0, 0);
         AppHelper.getInstance().startAnimation(activity, dateMenuView, mDatePop, true);
     }
 

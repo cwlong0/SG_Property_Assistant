@@ -6,6 +6,7 @@ import com.softgrid.shortvideo.callback.CallBackListener;
 import com.softgrid.shortvideo.model.Banner;
 import com.softgrid.shortvideo.model.Bespoke;
 import com.softgrid.shortvideo.model.Building;
+import com.softgrid.shortvideo.model.HotWord;
 import com.softgrid.shortvideo.model.Loans;
 import com.softgrid.shortvideo.model.Msg;
 import com.softgrid.shortvideo.model.SearchCondition;
@@ -85,7 +86,7 @@ public interface INetLogic {
      * @param listener 数据回调
      *
      * */
-    void searchBuilding(Context context, String keyword, int page, SearchCondition condition, CallBackListener<Building> listener);
+    void searchBuilding(Context context, String keyword, int page, SearchCondition condition, CallBackListener<ArrayList<Building>> listener);
 
     /**
      * 关注房产
@@ -167,4 +168,15 @@ public interface INetLogic {
      * 获取中介推荐
      * */
     void getIntermediary(Context context, int page, CallBackListener<ArrayList<User>> listener);
+
+    /**
+     * 获取搜索热词
+     * */
+    void getHotWords(Context context, CallBackListener<ArrayList<HotWord>> listener);
+
+    /**
+     *
+     * 搜索联想
+     * */
+    void searchThink(Context context, String key, CallBackListener<ArrayList<String>> listener);
 }

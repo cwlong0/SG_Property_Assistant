@@ -14,6 +14,7 @@ import com.softgrid.shortvideo.info.UserInfo;
 import com.softgrid.shortvideo.model.Banner;
 import com.softgrid.shortvideo.model.Bespoke;
 import com.softgrid.shortvideo.model.Building;
+import com.softgrid.shortvideo.model.HotWord;
 import com.softgrid.shortvideo.model.Loans;
 import com.softgrid.shortvideo.model.Msg;
 import com.softgrid.shortvideo.model.SearchCondition;
@@ -28,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -676,7 +678,7 @@ public class NetLogicImpl implements INetLogic {
     }
 
     @Override
-    public void searchBuilding(final Context context, String keyword, int page, SearchCondition condition, final CallBackListener<Building> listener) {
+    public void searchBuilding(final Context context, String keyword, int page, SearchCondition condition, final CallBackListener<ArrayList<Building>> listener) {
 
         String body = null;
         try {
@@ -810,8 +812,20 @@ public class NetLogicImpl implements INetLogic {
 
                 }
                 finally {
+
+                    ArrayList<Building> dataList = new ArrayList<>();
+                    for (int i = 0; i < 10; i++){
+                        Building building = new Building(true);
+                        building.setValid(true);
+                        dataList.add(building);
+                    }
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
                     msg.obj = hashMap;
                     handler.sendMessage(msg);
+
+//                    msg.obj = hashMap;
+//                    handler.sendMessage(msg);
                 }
 
             }
@@ -2255,6 +2269,160 @@ public class NetLogicImpl implements INetLogic {
 
 //                    msg.obj = hashMap;
 //                    handler.sendMessage(msg);
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void getHotWords(Context context, final CallBackListener<ArrayList<HotWord>> listener) {
+
+        String body = null;
+        try {
+            JSONObject params = new JSONObject();
+
+            String paramsString = params.toString();
+
+            body = HttpRequestInfo.getInstance()
+                    .getRequestParams(context, "word/getHotwords", paramsString);
+
+            //加密
+            body = SecurityTool.encodeStatic(body);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        MediaType mediaType = MediaType.parse(HttpRequestInfo.MEDIA_TYPE_DEF);
+        Request request = new Request.Builder()
+                .url(HttpRequestInfo.HOST)
+                .post(RequestBody.create(mediaType, body))
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                msg.what = ERROR;
+                ErrorInfo errorInfo = new ErrorInfo(e);
+                hashMap.put(KEY_DATA, errorInfo);
+                msg.obj = hashMap;
+                handler.sendMessage(msg);
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                try{
+                    JSONObject object = new JSONObject(response.body().string());
+                    JSONObject dataObject = object.getJSONObject("d");
+                    JSONArray dataArray = dataObject.getJSONArray("info");
+
+                    ArrayList<HotWord> dataList = new ArrayList<>();
+
+                    for (int i = 0; i < dataArray.length(); i++){
+
+                        JSONObject item = dataArray.getJSONObject(i);
+                        HotWord wordModel = gson.fromJson(item.toString(), HotWord.class);
+                        dataList.add(wordModel);
+                    }
+
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
+                }
+                catch (Exception e){
+
+                    msg.what = ERROR;
+                    ErrorInfo errorInfo = new ErrorInfo(e);
+                    hashMap.put(KEY_DATA, errorInfo);
+
+                }
+                finally {
+
+                    ArrayList<HotWord> dataList = new ArrayList<>();
+                    for (int i = 0; i < 10; i++){
+                        dataList.add(new HotWord(true));
+                    }
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
+                    msg.obj = hashMap;
+                    handler.sendMessage(msg);
+
+//                    msg.obj = hashMap;
+//                    handler.sendMessage(msg);
+                }
+
+            }
+        });
+
+    }
+
+    @Override
+    public void searchThink(final Context context, final String key, final CallBackListener<ArrayList<String>> listener) {
+        // TODO Auto-generated method stub
+
+        MediaType mediaType = MediaType.parse(HttpRequestInfo.MEDIA_TYPE_DEF);
+        Request request = new Request.Builder()
+                .url("http://api.bing.com/osjson.aspx?query=" + URLEncoder.encode(key))
+                .get()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                msg.what = ERROR;
+                ErrorInfo errorInfo = new ErrorInfo(e);
+                hashMap.put(KEY_DATA, errorInfo);
+                msg.obj = hashMap;
+                handler.sendMessage(msg);
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                Message msg = handler.obtainMessage();
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put(KEY_CALLBACK, listener);
+
+                try{
+                    JSONArray jsonArray = new JSONArray(response.body().string());
+                    ArrayList<String> dataList = new ArrayList();
+                    JSONArray dataJsonArray = jsonArray.getJSONArray(1);
+                    for (int i = 0; i < dataJsonArray.length(); i++) {
+                        String stringData = dataJsonArray.getString(i);
+                        dataList.add(stringData);
+                    }
+
+                    msg.what = COMPLETE;
+                    hashMap.put(KEY_DATA, dataList);
+                }
+                catch (Exception e){
+
+                    msg.what = ERROR;
+                    ErrorInfo errorInfo = new ErrorInfo(e);
+                    hashMap.put(KEY_DATA, errorInfo);
+
+                }
+                finally {
+
+                    msg.obj = hashMap;
+                    handler.sendMessage(msg);
                 }
 
             }
