@@ -45,7 +45,12 @@ public class FlowLayout extends RelativeLayout {
     // 关键字竖直padding，单位为dp
     private int textPaddingV = dp2px(4);
 
+    //是否全圆角
+    private boolean circleStyle = true;
+
     private boolean normalColor;
+
+    private String selectedItem;
 
     public void setNormalColor(boolean normalColor) {
         this.normalColor = normalColor;
@@ -88,6 +93,9 @@ public class FlowLayout extends RelativeLayout {
 
             } else if (attr == R.styleable.FlowLayoutAttrs_textPaddingV) {
                 textPaddingV = typedArray.getDimensionPixelSize(attr, textPaddingV);
+
+            }else if (attr == R.styleable.FlowLayoutAttrs_circleStyle) {
+                circleStyle = typedArray.getBoolean(attr, circleStyle);
             }
         }
         typedArray.recycle();
@@ -264,8 +272,14 @@ public class FlowLayout extends RelativeLayout {
 
             this.addView(tv, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
+
             if (onItemClickListener != null){
-                tv.setBackgroundResource(backgroundResource);
+                if (circleStyle){
+                    tv.setBackgroundResource(backgroundResource);
+                }
+                else {
+                    tv.setBackgroundResource(R.drawable.bg_flowout);
+                }
                 tv.setClickable(true);
                 tv.setOnClickListener(new OnClickListener() {
                     @Override
@@ -282,6 +296,35 @@ public class FlowLayout extends RelativeLayout {
 
             textViews.add(tv);
         }
+    }
+
+    public void setSelectedItem(String itemString){
+        if (itemString != null){
+            if (selectedItem == null || !selectedItem.equals(itemString)){
+                selectedItem = itemString;
+            }
+            else {
+                selectedItem = null;
+            }
+        }
+        else {
+            selectedItem = null;
+        }
+        for (int i = 0; i < textViews.size(); i++){
+            TextView tv = textViews.get(i);
+            if (selectedItem != null && tv.getText().equals(selectedItem)){
+                tv.setSelected(true);
+                tv.setTextColor(getContext().getColor(R.color.main_top));
+            }
+            else {
+                tv.setSelected(false);
+                tv.setTextColor(textColor);
+            }
+        }
+    }
+
+    public String getSelectedItem(){
+        return selectedItem;
     }
 
     public interface OnItemClickListener {
@@ -314,6 +357,14 @@ public class FlowLayout extends RelativeLayout {
 
     public void setTextPaddingV(int textPaddingV) {
         this.textPaddingV = dp2px(textPaddingV);
+    }
+
+    public boolean isCircleStyle() {
+        return circleStyle;
+    }
+
+    public void setCircleStyle(boolean circleStyle) {
+        this.circleStyle = circleStyle;
     }
 
     private int dp2px(float dp) {

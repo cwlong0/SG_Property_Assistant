@@ -85,6 +85,27 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
     private PopListAdapter mRegionPopListAdapter1;
     private PopListAdapter mRegionPopListAdapter2;
 
+    private PopupWindow mPricePop;
+    private View mPriceBgView;
+    private ListView mPricePopListView;
+    private PopListAdapter mPricePopListAdapter;
+    private ArrayList<String> priceList;
+
+    private PopupWindow mTypePop;
+    private View mTypeBgView;
+    private ListView mTypePopListView;
+    private PopListAdapter mTypePopListAdapter;
+    private ArrayList<String> typeList;
+
+    private PopupWindow mMorePop;
+    private View mMoreBgView;
+    private FlowLayout mAreaFlow;
+    private FlowLayout mOrientationFlow;
+    private FlowLayout mDecorateFlow;
+    private FlowLayout mSortFlow;
+    private View mMoreClearBtn;
+    private View mMoreConfirmBtn;
+
     private KeywordAdapter keywordAdapter;
     private BuildingAdapter buildingAdapter;
 
@@ -103,6 +124,7 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
     private ArrayList<String> hisWordList;
 
     private int currentTab;
+
 
 
     @Override
@@ -189,6 +211,39 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
                 mRegionPop.dismiss();
             }
         }
+        else if(v == mPriceBgView){
+            if (mPricePop.isShowing()){
+                mPricePop.dismiss();
+            }
+        }
+        else if(v == mTypeBgView){
+            if (mTypePop.isShowing()){
+                mTypePop.dismiss();
+            }
+        }
+        else if(v == mMoreBgView){
+            if (mMorePop.isShowing()){
+                mMorePop.dismiss();
+            }
+        }
+        else if(v == mMoreClearBtn){
+            mAreaFlow.setSelectedItem(null);
+            mDecorateFlow.setSelectedItem(null);
+            mOrientationFlow.setSelectedItem(null);
+            mSortFlow.setSelectedItem(null);
+            condition.setArea(null);
+            condition.setOrientation(0);
+            condition.setDecorate(0);
+            condition.setSort(0);
+            updateUI();
+        }
+        else if(v == mMoreConfirmBtn){
+            if (mMorePop.isShowing()){
+                mMorePop.dismiss();
+            }
+            updateUI();
+            search();
+        }
     }
 
     public void initUI(View view) {
@@ -233,6 +288,8 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
         mSearchBtn.setOnClickListener(this);
         mLeftView.setOnClickListener(this);
         mRightView.setOnClickListener(this);
+
+        mFlowLayout.setOnClickListener(this);
 
         mConRegionText.setOnClickListener(this);
         mConRegionTriangle.setOnClickListener(this);
@@ -341,6 +398,265 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
 
     private void updateUI(){
 
+        if (mRegionPop != null){
+            String text = condition.getPd()
+                    + getActivity().getResources().getString(R.string.region);
+
+            mRegionPopListAdapter1.setKeyword(text);
+            if (condition.getPd() > 0){
+                mConRegionText.setText(text);
+                mConRegionTriangle.setText(getString(R.string.con_triangle_up));
+                mConRegionText.setTextColor(getActivity().getColor(R.color.main_top));
+                mConRegionTriangle.setTextColor(getActivity().getColor(R.color.main_top));
+            }
+            else {
+                mConRegionText.setText(getActivity().getResources().getString(R.string.con_region));
+                mConRegionTriangle.setText(getString(R.string.con_triangle));
+                mConRegionText.setTextColor(getActivity().getColor(R.color.color_detail));
+                mConRegionTriangle.setTextColor(getActivity().getColor(R.color.color_text2));
+            }
+        }
+
+        if (mPricePop != null){
+            String text = null;
+            if (condition.getTotalPrice() != null){
+                text = condition.getTotalPrice()
+                        + getActivity().getResources().getString(R.string.wan);
+
+                if (condition.getTotalPrice().equals("200")){
+                    text = condition.getTotalPrice()
+                            + getActivity().getResources().getString(R.string.wan)
+                            + getString(R.string.up);
+                }
+            }
+
+            mPricePopListAdapter.setKeyword(text);
+
+            if (condition.getTotalPrice() != null){
+                mConPriceText.setText(text);
+                mConPriceTriangle.setText(getString(R.string.con_triangle_up));
+                mConPriceText.setTextColor(getActivity().getColor(R.color.main_top));
+                mConPriceTriangle.setTextColor(getActivity().getColor(R.color.main_top));
+            }
+            else {
+                mConPriceText.setText(getActivity().getResources().getString(R.string.con_price));
+                mConPriceTriangle.setText(getString(R.string.con_triangle));
+                mConPriceText.setTextColor(getActivity().getColor(R.color.color_detail));
+                mConPriceTriangle.setTextColor(getActivity().getColor(R.color.color_text2));
+            }
+        }
+
+        if (mTypePop != null){
+            String text = null;
+            if (condition.getRooms() != null){
+                text = condition.getRooms()
+                        + getActivity().getResources().getString(R.string.room_unit);
+
+                if (condition.getRooms().equals("6")){
+                    text = "5"
+                            + getString(R.string.room_unit)
+                            + getString(R.string.up);
+                }
+            }
+
+            mTypePopListAdapter.setKeyword(text);
+
+            if (condition.getRooms() != null){
+                mConTypeText.setText(text);
+                mConTypeTriangle.setText(getString(R.string.con_triangle_up));
+                mConTypeText.setTextColor(getActivity().getColor(R.color.main_top));
+                mConTypeTriangle.setTextColor(getActivity().getColor(R.color.main_top));
+            }
+            else {
+                mConTypeText.setText(getActivity().getResources().getString(R.string.con_type));
+                mConTypeTriangle.setText(getString(R.string.con_triangle));
+                mConTypeText.setTextColor(getActivity().getColor(R.color.color_detail));
+                mConTypeTriangle.setTextColor(getActivity().getColor(R.color.color_text2));
+            }
+        }
+
+        if (mMorePop != null){
+            String text = null;
+            if (condition.getArea() != null){
+
+                if (condition.getArea().equals("0-50")){
+                    text = "50" + getString(R.string.area_unit) + getString(R.string.down);
+                    condition.setArea("0-50");
+                }
+                else if(condition.getArea().equals("50-70")){
+                    text = "50 - 70" + getString(R.string.area_unit);
+                }
+                else if(condition.getArea().equals("70-90")){
+                    text = "70 - 90" + getString(R.string.area_unit);
+                }
+                else if(condition.getArea().equals("90-120")){
+                    text = "90 - 120" + getString(R.string.area_unit);
+                }
+                else if(condition.getArea().equals("120")){
+                    text = "120" + getString(R.string.area_unit) + getString(R.string.up);
+                }
+            }
+
+            if (condition.getOrientation() > 0){
+                if (condition.getOrientation() == 1){
+                    if (text == null){
+                        text = getString(R.string.orientation_1);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_1);
+                    }
+                }
+                else if(condition.getOrientation() == 2){
+                    if (text == null){
+                        text = getString(R.string.orientation_2);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_2);
+                    }
+                }
+                else if(condition.getOrientation() == 3){
+                    if (text == null){
+                        text = getString(R.string.orientation_3);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_3);
+                    }
+                }
+                else if(condition.getOrientation() == 4){
+                    if (text == null){
+                        text = getString(R.string.orientation_4);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_4);
+                    }
+                }
+                else if(condition.getOrientation() == 5){
+                    if (text == null){
+                        text = getString(R.string.orientation_5);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_5);
+                    }
+                }
+                else if(condition.getOrientation() == 6){
+                    if (text == null){
+                        text = getString(R.string.orientation_6);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_6);
+                    }
+                }
+                else if(condition.getOrientation() == 7){
+                    if (text == null){
+                        text = getString(R.string.orientation_7);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_7);
+                    }
+                }
+                else if(condition.getOrientation() == 8){
+                    if (text == null){
+                        text = getString(R.string.orientation_8);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.orientation_8);
+                    }
+                }
+            }
+
+            if (condition.getDecorate() > 0){
+
+                if (condition.getDecorate() == 1){
+                    if (text == null){
+                        text = getString(R.string.decorate_1);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.decorate_1);
+                    }
+                }
+                else if (condition.getDecorate() == 2){
+                    if (text == null){
+                        text = getString(R.string.decorate_2);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.decorate_2);
+                    }
+                }
+                else if (condition.getDecorate() == 3){
+                    if (text == null){
+                        text = getString(R.string.decorate_3);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.decorate_3);
+                    }
+                }
+                else if (condition.getDecorate() == 4){
+                    if (text == null){
+                        text = getString(R.string.decorate_4);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.decorate_4);
+                    }
+                }
+                else if (condition.getDecorate() == 5){
+                    if (text == null){
+                        text = getString(R.string.decorate_5);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.decorate_5);
+                    }
+                }
+            }
+
+            if (condition.getSort() > 0){
+                if (condition.getSort() == 1){
+                    if (text == null){
+                        text = getString(R.string.sort_price);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.sort_price);
+                    }
+                }
+                else if (condition.getSort() == 2){
+                    if (text == null){
+                        text = getString(R.string.sort_publish);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.sort_publish);
+                    }
+                }
+                else if (condition.getSort() == 3){
+                    if (text == null){
+                        text = getString(R.string.sort_open);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.sort_open);
+                    }
+                }
+                else if (condition.getSort() == 4){
+                    if (text == null){
+                        text = getString(R.string.sort_area);
+                    }
+                    else {
+                        text = text + "," + getString(R.string.sort_area);
+                    }
+                }
+            }
+
+            if (text != null){
+                mConMoreText.setText(text);
+                mConMoreTriangle.setText(getString(R.string.con_triangle_up));
+                mConMoreText.setTextColor(getActivity().getColor(R.color.main_top));
+                mConMoreTriangle.setTextColor(getActivity().getColor(R.color.main_top));
+            }
+            else {
+                mConMoreText.setText(getActivity().getResources().getString(R.string.con_more));
+                mConMoreTriangle.setText(getString(R.string.con_triangle));
+                mConMoreText.setTextColor(getActivity().getColor(R.color.color_detail));
+                mConMoreTriangle.setTextColor(getActivity().getColor(R.color.color_text2));
+            }
+        }
+
     }
 
     private void regionPop(){
@@ -375,24 +691,8 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                     condition.setPd(position);
                     search();
-
-                    String text = condition.getPd()
-                            + getActivity().getResources().getString(R.string.region);
-
-                    mRegionPopListAdapter1.setKeyword(text);
                     mRegionPop.dismiss();
-                    if (condition.getPd() > 0){
-                        mConRegionText.setText(text);
-                        mConRegionTriangle.setText(getString(R.string.con_triangle_up));
-                        mConRegionText.setTextColor(getActivity().getColor(R.color.main_top));
-                        mConRegionTriangle.setTextColor(getActivity().getColor(R.color.main_top));
-                    }
-                    else {
-                        mConRegionText.setText(getActivity().getResources().getString(R.string.con_region));
-                        mConRegionTriangle.setText(getString(R.string.con_triangle));
-                        mConRegionText.setTextColor(getActivity().getColor(R.color.color_detail));
-                        mConRegionTriangle.setTextColor(getActivity().getColor(R.color.color_text2));
-                    }
+                    updateUI();
                 }
             });
 
@@ -427,14 +727,367 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
 
     private void pricePop(){
 
+        if (mPricePop == null){
+            View popView = getActivity().getLayoutInflater().inflate(R.layout.pop_price, null);
+            int width = DeviceInfoTool.getScreenWidth(getActivity());
+            int height = DeviceInfoTool.getScreenHeight(getActivity());
+
+            mPricePop = new PopupWindow(popView, width, height, true);
+
+            mPricePop.setBackgroundDrawable(new ColorDrawable());
+            mPricePop.setOutsideTouchable(true);
+
+            mPriceBgView = popView.findViewById(R.id.root_view);
+            mPricePopListView = popView.findViewById(R.id.price_list);
+
+            mPricePopListView.setVerticalScrollBarEnabled(false);
+
+            mPriceBgView.setOnClickListener(this);
+            mPricePop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    mMaskView.setVisibility(View.GONE);
+                }
+            });
+
+            mPricePopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                    if (position > 0){
+                        condition.setTotalPrice(priceList.get(position));
+                    }
+                    else {
+                        condition.setTotalPrice(null);
+                    }
+
+                    search();
+                    mPricePop.dismiss();
+                    updateUI();
+                }
+            });
+
+            mPricePopListAdapter = new PopListAdapter(getActivity());
+            mPricePopListView.setAdapter(mPricePopListAdapter);
+
+            priceList = new ArrayList<>();
+            priceList.add("0");
+            priceList.add("0-30");
+            priceList.add("30-50");
+            priceList.add("50-100");
+            priceList.add("100-200");
+            priceList.add("200");
+
+            ArrayList<String> dataList = new ArrayList<>();
+            dataList.add(getActivity().getResources().getString(R.string.unlimited));
+            dataList.add("0-30" + getString(R.string.wan));
+            dataList.add("30-50" + getString(R.string.wan));
+            dataList.add("50-100" + getString(R.string.wan));
+            dataList.add("100-200" + getString(R.string.wan));
+            dataList.add("200" + getString(R.string.wan) + getString(R.string.up));
+
+            mPricePopListAdapter.setData(dataList);
+        }
+
+        if (mPricePop.isShowing()){
+            mPricePop.dismiss();
+            return;
+        }
+        if (condition.getTotalPrice() != null){
+            mPricePopListAdapter.setKeyword(condition.getTotalPrice()
+                    + getActivity().getResources().getString(R.string.wan));
+            if (condition.getTotalPrice().equals("200")){
+                mPricePopListAdapter.setKeyword(condition.getTotalPrice()
+                        + getActivity().getResources().getString(R.string.wan)
+                        + getString(R.string.up));
+            }
+            else if(condition.getTotalPrice().equals("0")){
+                mPricePopListAdapter.setKeyword(getActivity().getResources().getString(R.string.unlimited));
+            }
+        }
+        else {
+            mPricePopListAdapter.setKeyword(null);
+        }
+        mMaskView.setVisibility(View.VISIBLE);
+        mPricePop.showAsDropDown(mPopLineView, Gravity.BOTTOM, 0, 0);
+
     }
 
     private void typePop(){
 
+        if (mTypePop == null){
+            View popView = getActivity().getLayoutInflater().inflate(R.layout.pop_type, null);
+            int width = DeviceInfoTool.getScreenWidth(getActivity());
+            int height = DeviceInfoTool.getScreenHeight(getActivity());
+
+            mTypePop = new PopupWindow(popView, width, height, true);
+
+            mTypePop.setBackgroundDrawable(new ColorDrawable());
+            mTypePop.setOutsideTouchable(true);
+
+            mTypeBgView = popView.findViewById(R.id.root_view);
+            mTypePopListView = popView.findViewById(R.id.type_list);
+
+            mTypePopListView.setVerticalScrollBarEnabled(false);
+
+            mTypeBgView.setOnClickListener(this);
+            mTypePop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    mMaskView.setVisibility(View.GONE);
+                }
+            });
+
+            mTypePopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                    if (position > 0){
+                        condition.setRooms(typeList.get(position));
+                    }
+                    else {
+                        condition.setRooms(null);
+                    }
+
+                    search();
+                    mTypePop.dismiss();
+                    updateUI();
+                }
+            });
+
+            mTypePopListAdapter = new PopListAdapter(getActivity());
+            mTypePopListView.setAdapter(mTypePopListAdapter);
+
+            typeList = new ArrayList<>();
+            typeList.add("-1");
+            typeList.add("1");
+            typeList.add("2");
+            typeList.add("3");
+            typeList.add("4");
+            typeList.add("5");
+            typeList.add("6");
+
+            ArrayList<String> dataList = new ArrayList<>();
+            dataList.add(getActivity().getResources().getString(R.string.unlimited));
+            dataList.add("1" + getString(R.string.room_unit));
+            dataList.add("2" + getString(R.string.room_unit));
+            dataList.add("3" + getString(R.string.room_unit));
+            dataList.add("4" + getString(R.string.room_unit));
+            dataList.add("5" + getString(R.string.room_unit));
+            dataList.add("5" + getString(R.string.room_unit) + getString(R.string.up));
+
+            mTypePopListAdapter.setData(dataList);
+        }
+
+        if (mTypePop.isShowing()){
+            mTypePop.dismiss();
+            return;
+        }
+        if (condition.getRooms() != null){
+            mTypePopListAdapter.setKeyword(condition.getRooms()
+                    + getActivity().getResources().getString(R.string.room_unit));
+
+            if (condition.getRooms().equals("6")){
+                mPricePopListAdapter.setKeyword("5"
+                        + getString(R.string.room_unit)
+                        + getString(R.string.up));
+            }
+            else if(condition.getRooms().equals("-1")){
+                mPricePopListAdapter.setKeyword(getActivity().getResources().getString(R.string.unlimited));
+            }
+        }
+        else {
+            mTypePopListAdapter.setKeyword(null);
+        }
+        mMaskView.setVisibility(View.VISIBLE);
+        mTypePop.showAsDropDown(mPopLineView, Gravity.BOTTOM, 0, 0);
+
     }
 
     private void morePop(){
+        if (mMorePop == null){
+            View popView = getActivity().getLayoutInflater().inflate(R.layout.pop_more, null);
+            int width = DeviceInfoTool.getScreenWidth(getActivity());
+            int height = DeviceInfoTool.getScreenHeight(getActivity());
 
+            mMorePop = new PopupWindow(popView, width, height, true);
+
+            mMorePop.setBackgroundDrawable(new ColorDrawable());
+            mMorePop.setOutsideTouchable(true);
+
+            mMoreBgView = popView.findViewById(R.id.root_view);
+            mAreaFlow = popView.findViewById(R.id.flow_area);
+            mOrientationFlow = popView.findViewById(R.id.flow_orientation);
+            mSortFlow = popView.findViewById(R.id.flow_sort);
+            mDecorateFlow = popView.findViewById(R.id.flow_decorate);
+            mMoreClearBtn = popView.findViewById(R.id.btn_clear);
+            mMoreConfirmBtn = popView.findViewById(R.id.btn_confirm);
+
+            mMoreBgView.setOnClickListener(this);
+            mMoreClearBtn.setOnClickListener(this);
+            mMoreConfirmBtn.setOnClickListener(this);
+
+            mMorePop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    mMaskView.setVisibility(View.GONE);
+                }
+            });
+
+            ArrayList<String> areaList = new ArrayList<>();
+            areaList.add("50" + getString(R.string.area_unit) + getString(R.string.down));
+            areaList.add("50 - 70" + getString(R.string.area_unit));
+            areaList.add("70 - 90" + getString(R.string.area_unit));
+            areaList.add("90 - 120" + getString(R.string.area_unit));
+            areaList.add("120" + getString(R.string.area_unit) + getString(R.string.up));
+            mAreaFlow.setFlowLayout(areaList, new FlowLayout.OnItemClickListener() {
+                @Override
+                public void onItemClick(String content) {
+                    mAreaFlow.setSelectedItem(content);
+                    if (mAreaFlow.getSelectedItem() != null){
+                        if (mAreaFlow.getSelectedItem().equals("50" + getString(R.string.area_unit) + getString(R.string.down))){
+                            condition.setArea("0-50");
+                        }
+                        else if(mAreaFlow.getSelectedItem().equals("50 - 70" + getString(R.string.area_unit))){
+                            condition.setArea("50-70");
+                        }
+                        else if(mAreaFlow.getSelectedItem().equals("70 - 90" + getString(R.string.area_unit))){
+                            condition.setArea("70-90");
+                        }
+                        else if(mAreaFlow.getSelectedItem().equals("90 - 120" + getString(R.string.area_unit))){
+                            condition.setArea("90-120");
+                        }
+                        else if(mAreaFlow.getSelectedItem().equals("120" + getString(R.string.area_unit) + getString(R.string.up))){
+                            condition.setArea("120");
+                        }
+                    }
+                    else {
+                        condition.setArea(null);
+                    }
+                    updateUI();
+                }
+            });
+
+            ArrayList<String> orientationList = new ArrayList<>();
+            orientationList.add(getString(R.string.orientation_1));
+            orientationList.add(getString(R.string.orientation_2));
+            orientationList.add(getString(R.string.orientation_3));
+            orientationList.add(getString(R.string.orientation_4));
+            orientationList.add(getString(R.string.orientation_5));
+            orientationList.add(getString(R.string.orientation_6));
+            orientationList.add(getString(R.string.orientation_7));
+            orientationList.add(getString(R.string.orientation_8));
+            mOrientationFlow.setFlowLayout(orientationList, new FlowLayout.OnItemClickListener() {
+                @Override
+                public void onItemClick(String content) {
+                    mOrientationFlow.setSelectedItem(content);
+                    if (mOrientationFlow.getSelectedItem() != null){
+                        if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_1))){
+                            condition.setOrientation(1);
+                        }
+                        else if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_2))){
+                            condition.setOrientation(2);
+                        }
+                        else if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_3))){
+                            condition.setOrientation(3);
+                        }
+                        else if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_4))){
+                            condition.setOrientation(4);
+                        }
+                        else if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_5))){
+                            condition.setOrientation(5);
+                        }
+                        else if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_6))){
+                            condition.setOrientation(6);
+                        }
+                        else if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_7))){
+                            condition.setOrientation(7);
+                        }
+                        else if (mOrientationFlow.getSelectedItem().equals(getString(R.string.orientation_8))){
+                            condition.setOrientation(8);
+                        }
+                    }
+                    else {
+                        condition.setOrientation(0);
+                    }
+                    updateUI();
+                }
+            });
+
+            ArrayList<String> decorateList = new ArrayList<>();
+            decorateList.add(getString(R.string.decorate_1));
+            decorateList.add(getString(R.string.decorate_2));
+            decorateList.add(getString(R.string.decorate_3));
+            decorateList.add(getString(R.string.decorate_4));
+            decorateList.add(getString(R.string.decorate_5));
+            mDecorateFlow.setFlowLayout(decorateList, new FlowLayout.OnItemClickListener() {
+                @Override
+                public void onItemClick(String content) {
+                    mDecorateFlow.setSelectedItem(content);
+                    if (mDecorateFlow.getSelectedItem() != null){
+                        if (mDecorateFlow.getSelectedItem().equals(getString(R.string.decorate_1))){
+                            condition.setDecorate(1);
+                        }
+                        else if (mDecorateFlow.getSelectedItem().equals(getString(R.string.decorate_2))){
+                            condition.setDecorate(2);
+                        }
+                        else if (mDecorateFlow.getSelectedItem().equals(getString(R.string.decorate_3))){
+                            condition.setDecorate(3);
+                        }
+                        else if (mDecorateFlow.getSelectedItem().equals(getString(R.string.decorate_4))){
+                            condition.setDecorate(4);
+                        }
+                        else if (mDecorateFlow.getSelectedItem().equals(getString(R.string.decorate_5))){
+                            condition.setDecorate(5);
+                        }
+                    }
+                    else {
+                        condition.setDecorate(0);
+                    }
+                    updateUI();
+                }
+            });
+
+
+            ArrayList<String> sortList = new ArrayList<>();
+            sortList.add(getString(R.string.sort_price));
+            sortList.add(getString(R.string.sort_area));
+            sortList.add(getString(R.string.sort_publish));
+            sortList.add(getString(R.string.sort_open));
+            mSortFlow.setFlowLayout(sortList, new FlowLayout.OnItemClickListener() {
+                @Override
+                public void onItemClick(String content) {
+                    mSortFlow.setSelectedItem(content);
+                    if (mSortFlow.getSelectedItem() != null){
+                        if (mSortFlow.getSelectedItem().equals(getString(R.string.sort_price))){
+                            condition.setSort(1);
+                        }
+                        else if (mSortFlow.getSelectedItem().equals(getString(R.string.sort_publish))){
+                            condition.setSort(2);
+                        }
+                        else if (mSortFlow.getSelectedItem().equals(getString(R.string.sort_open))){
+                            condition.setSort(3);
+                        }
+                        else if (mSortFlow.getSelectedItem().equals(getString(R.string.sort_area))){
+                            condition.setSort(4);
+                        }
+                    }
+                    else {
+                        condition.setSort(0);
+                    }
+                    updateUI();
+                }
+            });
+
+        }
+
+        if (mMorePop.isShowing()){
+            mMorePop.dismiss();
+            return;
+        }
+
+        mMaskView.setVisibility(View.VISIBLE);
+        mMorePop.showAsDropDown(mPopLineView, Gravity.BOTTOM, 0, 0);
     }
 
     private void clearHis(){
@@ -464,11 +1117,13 @@ public class TabSearchFragment extends Fragment implements View.OnClickListener{
             case 1:
                 mLeftView.setSelected(true);
                 mLeftText.setSelected(true);
+                condition.setIsResale(0);
                 break;
 
             case 2:
                 mRightView.setSelected(true);
                 mRightText.setSelected(true);
+                condition.setIsResale(1);
                 break;
         }
 

@@ -55,6 +55,7 @@
     <attr name="backgroundResource" format="reference" />
     <attr name="textPaddingH" format="dimension" />
     <attr name="textPaddingV" format="dimension" />
+    <attr name="circleStyle" format="boolean" />
 
     <declare-styleable name="FlowLayoutAttrs">
         <attr name="horizontalSpacing" />
@@ -64,5 +65,6 @@
         <attr name="backgroundResource" />
         <attr name="textPaddingH" />
         <attr name="textPaddingV" />
+        <attr name="circleStyle" />
     </declare-styleable>
 </resources>

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">ShortVideo</string>
+    <string name="area">面积</string>
     <string name="area_unit">㎡</string>
 
     <string name="banker">Banker</string>
@@ -41,8 +42,10 @@
     <string name="con_triangle">&#160;▼</string>
     <string name="con_triangle_up">&#160;▲</string>
 
+    <string name="down">以下</string>
     <string name="delete">删除</string>
     <string name="detail">详细</string>
+    <string name="decorate">装修</string>
     <string name="decorate_0">其他</string>
     <string name="decorate_1">毛坯</string>
     <string name="decorate_2">简装</string>
@@ -85,6 +88,7 @@
 
     <string name="no_data">没有数据</string>
 
+    <string name="orientation">朝向</string>
     <string name="orientation_1">朝东</string>
     <string name="orientation_2">朝西</string>
     <string name="orientation_3">朝南</string>
@@ -122,6 +126,12 @@
     <string name="status_3">尾盘</string>
     <string name="status_4">售罄</string>
     <string name="search_tips">搜索楼盘/街道/开发商</string>
+    <string name="sort">排序</string>
+    <string name="sort_def">默认排序</string>
+    <string name="sort_price">按价格排序</string>
+    <string name="sort_area">按面积排序</string>
+    <string name="sort_publish">按发布时间排序</string>
+    <string name="sort_open">按开盘时间排序</string>
 
     <string name="transaction">交易</string>
     <string name="transaction_detail">交易详情</string>
@@ -140,6 +150,7 @@
 
     <string name="update">修改</string>
     <string name="unlimited">不限</string>
+    <string name="up">以上</string>
 
     <string name="wan">万</string>
     <string name="wechat">微信</string>

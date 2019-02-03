@@ -11,6 +11,7 @@ public class SearchCondition {
     private int isResale;              //是否是二手房
     private int isAuth;                //是否已经通过认证（二手房）
     private int type;                  //房屋类型（1-公寓）
+    private int sort;                  //排序
     private String rooms;              //几个房间（1-4）
     private int decorate;              //装修等级
     private int orientation;           //朝向
@@ -47,6 +48,14 @@ public class SearchCondition {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 
     public String getRooms() {
